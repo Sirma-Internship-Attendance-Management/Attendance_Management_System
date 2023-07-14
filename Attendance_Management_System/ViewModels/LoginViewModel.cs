@@ -1,5 +1,8 @@
 ﻿using Attendance_Management_System.Commands;
+using System;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,6 +14,7 @@ namespace Attendance_Management_System.ViewModels
 
         private string _username;
         private string _password;
+        private SecureString _securePassword;
 
         public string Username
         {
@@ -27,8 +31,20 @@ namespace Attendance_Management_System.ViewModels
             get { return _password; }
             set
             {
-                _password = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Password)));
+                
+                _password = ConvertSecureStringToString(SecurePassword);
+                //_password = value;
+                //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Password)));
+            }
+        }
+
+        public SecureString SecurePassword
+        {
+            get { return _securePassword; }
+            set
+            {
+                _securePassword = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SecurePassword)));
             }
         }
 
@@ -55,7 +71,6 @@ namespace Attendance_Management_System.ViewModels
             }
             else
             {
-                // Authentication failed
                 MessageBox.Show("Invalid username or password. Please try again.");
             }
         }
@@ -70,6 +85,21 @@ namespace Attendance_Management_System.ViewModels
             string storedUsername = "admin";
             string storedPassword = "hashedPassword";
             return (username == storedUsername && password == storedPassword);
+        }
+
+        static string ConvertSecureStringToString(SecureString secureString)
+        {
+            IntPtr unmanagedString = IntPtr.Zero;
+            try
+            {
+                unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(secureString);
+                string regularString = Marshal.PtrToStringUni(unmanagedString);
+                return regularString;
+            }
+            finally
+            {
+                Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
+            }
         }
     }
 }
