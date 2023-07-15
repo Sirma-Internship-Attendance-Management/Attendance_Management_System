@@ -1,4 +1,5 @@
 ﻿using Attendance_Management_System.Commands;
+using Attendance_Management_System.Views;
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
@@ -15,6 +16,9 @@ namespace Attendance_Management_System.ViewModels
         private string _username;
         private string _password;
         private SecureString _securePassword;
+
+        
+        public ICommand GoToForgotPasswordCommand { get; set; }
 
         public string Username
         {
@@ -52,7 +56,7 @@ namespace Attendance_Management_System.ViewModels
 
         public LoginViewModel()
         {
-            LoginCommand = new RelayCommand(Login, CanLogin);
+            LoginCommand = new RelayCommand(Login, CanLogin);            
         }
 
         private void Login(object parameter)
@@ -101,5 +105,7 @@ namespace Attendance_Management_System.ViewModels
                 Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
             }
         }
+
+        
     }
 }

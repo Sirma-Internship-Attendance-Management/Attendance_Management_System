@@ -9,15 +9,21 @@
 
   <ItemGroup>
     <None Remove="Resources\fpLogo.png" />
+    <None Remove="Views\Images\fingerprint.gif" />
     <None Remove="Views\Images\key-icon.png" />
     <None Remove="Views\Images\user-icon.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+    <PackageReference Include="XamlAnimatedGif" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Views\Images\fingerprint.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\fpLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

@@ -7,7 +7,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Attendance_Management_System.Views"
         xmlns:customcontrols="clr-namespace:Attendance_Management_System.CustomControls"
-        xmlns:vm="clr-namespace:Attendance_Management_System.ViewModels"        
+        xmlns:vm="clr-namespace:Attendance_Management_System.ViewModels"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"        
+        xmlns:commands="clr-namespace:Attendance_Management_System.Commands"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -16,10 +19,12 @@
         AllowsTransparency="True"
         MouseDown="Window_MouseDown">
 
+    <!--<Window.Resources>
+        <commands:OpenForgetPassWinndow x:Key="OpenNewWindowCommand" />
+    </Window.Resources>-->
     <Border CornerRadius="12">
         <!--<Border.Background>
-            <ImageBrush ImageSource="/Images/back-image.jpg"
-                        Stretch="None"/>
+            <ImageBrush ImageSource="" Stretch="None"/>
         </Border.Background>-->
 
         <Border CornerRadius="10"                    
@@ -139,18 +144,66 @@
         </Grid>
 
         <StackPanel Margin="30,0,30,0" Grid.Row="1" Height="Auto">
+                    <materialDesign:TransitioningContent>
+                        <materialDesign:TransitioningContent.OpeningEffects>
+                            <materialDesign:TransitionEffect Kind="SlideInFromTop" Duration="0:0:0.8"/>
+                            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8"/>
+                        </materialDesign:TransitioningContent.OpeningEffects>
 
-            <Image Margin="0,30,0,0" Source="Images/fpLogo.png"
-                           Width="100" Height="100"/>
+                        <Border CornerRadius="10"                    
+            BorderThickness="2"
+            Opacity="0.95">
 
-            <TextBlock Margin="30,10,30,20" Text="Attendance_Management_System"
-                               Foreground="LightSteelBlue"
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#462AD8" Offset="0"/>
+                                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                    <GradientStop Color="#8A16C1" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+
+                            <StackPanel Margin="0,0,0,0" Height="Auto">
+                                <Ellipse Margin="0,30,0,0" Width="100" Height="100">
+                                    <Ellipse.Fill>
+                                        <VisualBrush>
+                                            <VisualBrush.Visual>
+                                                <Image Margin="0,0,0,0" gif:AnimationBehavior.SourceUri="Images/fingerprint.gif" Width="100" Height="100">
+                                                    <Image.RenderTransform>
+                                                        <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0.5" CenterY="0.5" />
+                                                    </Image.RenderTransform>
+                                                </Image>
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                        
+
+                        <TextBlock Margin="30,10,30,10" Text="Attendance_Management_System"                               
                                FontSize="14"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color="#2af598" Offset="1"/>
+                                            <GradientStop Color="#009efd" Offset="0.3"/>
+                                        </LinearGradientBrush>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <!--<Image Margin="0,30,0,0" gif:AnimationBehavior.SourceUri="Images/fingerprint.gif" Width="100" Height="100"/>-->
+                        <!-- <Image Margin="0,30,0,0" Source="Images/fpLogo.png" Width="100" Height="100"/> -->
+                    </materialDesign:TransitioningContent>
 
-                    <TextBlock Text="Please enter your credentials to continue:"
+
+                    <materialDesign:TransitioningContent>
+                        <materialDesign:TransitioningContent.OpeningEffects>
+                            <materialDesign:TransitionEffect Kind="SlideInFromBottom" Duration="0:0:0.8"/>
+                            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8"/>
+                        </materialDesign:TransitioningContent.OpeningEffects>
+                        <StackPanel Margin="30,15,30,0" Grid.Row="1" Height="Auto">
+                            <TextBlock Text="Please enter your credentials to continue:"
                                Foreground="LightGray"
                                FontSize="12"
                                FontWeight="Medium"
@@ -159,13 +212,14 @@
                                TextAlignment="Center"
                                Margin="0,5,0,0"/>
 
+                    
                     <TextBlock Text="Username"
                                Foreground="DarkGray"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
                                Margin="0,15,0,0"/>
-
+                    
                     <TextBox x:Name="txtUser"
                              Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="13"
@@ -198,8 +252,8 @@
                                                         Height="28"                            
                                                         Margin="0,5,0,0">
             </customcontrols:BindablePasswordBox>
-            
-            <!-- <Button Content="Login" FontSize="14" Margin="0 20" Command="{Binding LoginCommand}" /> -->
+                    
+                    <!-- <Button Content="Login" FontSize="14" Margin="0 20" Command="{Binding LoginCommand}" /> -->
             <Button x:Name="btnLogin" 
                             Command="{Binding LoginCommand}"
                             BorderThickness="0"
@@ -248,11 +302,30 @@
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
-                               Cursor="Hand"
-                               Margin="8,0,0,0"/>
+                               Cursor="Hand"                               
+                               Margin="8,0,0,0">
+                    <!--<i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+            <i:InvokeCommandAction Command="{StaticResource OpenNewWindowCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>-->
+                    </TextBlock>
 
-            </StackPanel>
-        </StackPanel>
+                                <!--<Button Width="110" 
+                                                Height="30"  
+                                                Content="Forgot password"
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource InteractiveButton}"
+                                                Margin="30,20,0,0"
+                                                IsTabStop="False"
+                                                Command="{Binding GoToForgotPasswordCommand}"
+                                                CommandParameter="{Binding ElementName=LoginWD}">
+                                </Button>-->
+
+                            </StackPanel>
+                </StackPanel>
+                </materialDesign:TransitioningContent>
+                </StackPanel>
     </Grid>
         </Border>
 
