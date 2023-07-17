@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Attendance_Management_System.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,34 @@ namespace Attendance_Management_System.Views
     /// </summary>
     public partial class CompanyAdminView : Window
     {
+
+        private readonly CompanyAdminViewModel _viewModel;
         public CompanyAdminView()
         {
             InitializeComponent();
+            _viewModel = new CompanyAdminViewModel();
+            DataContext = _viewModel;
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void btnOpen_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.OpenViewCommand.Execute(null);
         }
     }
 }
