@@ -1,4 +1,5 @@
 ﻿using Attendance_Management_System.Commands;
+using Attendance_Management_System.Models;
 using Attendance_Management_System.Views;
 using System;
 using System.ComponentModel;
@@ -48,7 +49,7 @@ namespace Attendance_Management_System.ViewModels
             string username = Username;
             string password = ConvertSecureStringToString(SecurePassword);
 
-            bool isAuthenticated = AuthenticateUser(username, password);
+            bool isAuthenticated = AuthenticateAdmin(username, password);
 
             if (isAuthenticated)
             {
@@ -70,11 +71,37 @@ namespace Attendance_Management_System.ViewModels
             return !string.IsNullOrEmpty(Username) && SecurePassword != null && SecurePassword.Length > 0;
         }
 
-        private bool AuthenticateUser(string username, string password)
+        private bool AuthenticateAdmin(string username, string password)
         {
-            string storedUsername = "admin";
-            string storedPassword = "hashedPassword";
-            return (username == storedUsername && password == storedPassword);
+            // Retrieve company admin credentials from the Company model or any other secure storage
+            Company storedCompany = GetCompanyByAdminCredentials(username, password);
+
+            if (storedCompany != null)
+            {
+                // Compare the provided password with the stored admin password
+                return password == storedCompany.AdminPassword;
+            }
+
+            return false;
+        }
+
+        // Simulated function to retrieve company by admin credentials
+        private Company GetCompanyByAdminCredentials(string username, string password)
+        {
+            // In a real-world scenario, you would retrieve the company from the database based on the admin credentials
+            // Here, we'll simulate it by hardcoding a company
+            if (username == "admin" && password == "password")
+            {
+                return new Company
+                {
+                    CompanyId = 1,
+                    CompanyName = "My Company",
+                    AdminUsername = "admin",
+                    AdminPassword = "password"
+                };
+            }
+
+            return null;
         }
 
         private string ConvertSecureStringToString(SecureString secureString)
