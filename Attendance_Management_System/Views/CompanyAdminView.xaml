@@ -11,7 +11,7 @@
         xmlns:commands="clr-namespace:Attendance_Management_System.Commands"
         mc:Ignorable="d"
         WindowStyle="None"
-        ResizeMode="NoResize"
+        ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         AllowsTransparency="True"
@@ -55,6 +55,7 @@
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
+                        <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="5"/>
@@ -102,6 +103,45 @@
 
                     </Button>
 
+
+                    <Button x:Name="btnMaximize"                           
+                            BorderThickness="0"
+                            Content="🗖"
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="btnMaximize_Click">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#228B22"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#32CD32"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+
+                    </Button>
+
+
+
+
+
                     <Button x:Name="btnClose"                          
                             BorderThickness="0"
                             Content="X"
@@ -109,7 +149,7 @@
                             FontSize="12"
                             FontFamily="Montserrat"
                             Cursor="Hand"
-                            Grid.Column="2"
+                            Grid.Column="3"
                             Click="btnClose_Click">
 
                         <Button.Style>
@@ -135,39 +175,112 @@
                         </Button.Template>
                     </Button>
                 </Grid>
-                <Button x:Name="btnOpen" 
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel
+                        Grid.Column="0">
+                        
+                    </StackPanel>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnOpen" 
+                            Grid.Column="1"
                             Command="{Binding OpenCommand}"
                             BorderThickness="0"
-                            Content="OpenEmpMang"
+                            
                             Foreground="White"
                             FontSize="12"
                             FontFamily="Montserrat"
-                            Cursor="Hand" Margin="3,144,-3,219" Grid.Row="1">
+                            Cursor="Hand" Margin="0,0,0,0" Grid.Row="1">
+                            
 
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="AntiqueWhite"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#28AEED"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
 
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#462AD8"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#28AEED"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-
-                    <Button.Template>
+                            <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Width="150" Height="40"
+                            <Border Width="100" Height="100"
                                         CornerRadius="20"
+                                        BorderThickness="2"
                                         Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
-                            </Border>
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#462AD8" Offset="0"/>
+                                                <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                                <GradientStop Color="#8A16C1" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                    </Border>
                         </ControlTemplate>
-                    </Button.Template>
+                    </Button.Template>                            
+                            <Image Source="Images/Employees.png" Width="100" Height="100" />
                 </Button>
 
+
+                        <Button x:Name="btnReports" 
+                            Grid.Column="0"
+                            Command="{Binding OpenCommand2}"
+                            BorderThickness="0"
+                            
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand" Margin="0,0,0,0" Grid.Row="1">
+
+
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="AntiqueWhite"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#28AEED"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="100" Height="100"
+                                        CornerRadius="20"
+                                        BorderThickness="2"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#462AD8" Offset="0"/>
+                                                <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                                <GradientStop Color="#8A16C1" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <Image Source="Images/Reports.png" Width="100" Height="100" />
+                        </Button>
+                    </Grid>
+                </Grid>
 
 
             </Grid>

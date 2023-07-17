@@ -1,6 +1,7 @@
 ﻿using Attendance_Management_System.Commands;
 using Attendance_Management_System.Models;
 using Attendance_Management_System.Views;
+using Attendance_Management_System.Views.MessageBox;
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
@@ -53,16 +54,21 @@ namespace Attendance_Management_System.ViewModels
 
             if (isAuthenticated)
             {
-                MessageBox.Show("Login successful!");
+                LogInSuccess lgs = new LogInSuccess();
+                lgs.ShowDialog();
+                
+                /*MessageBox.Show("Login successful!");
 
                 CompanyAdminView companyAdminView = new CompanyAdminView();
                 companyAdminView.Show();
 
-                Application.Current.MainWindow?.Close();
+                Application.Current.MainWindow?.Close();*/
             }
             else
             {
-                MessageBox.Show("Invalid username or password. Please try again.");
+                LogInFail lgf = new LogInFail();
+                lgf.ShowDialog();
+                //MessageBox.Show("Invalid username or password. Please try again.");
             }
         }
 

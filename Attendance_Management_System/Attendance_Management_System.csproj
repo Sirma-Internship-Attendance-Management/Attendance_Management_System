@@ -9,9 +9,15 @@
 
   <ItemGroup>
     <None Remove="Resources\fpLogo.png" />
+    <None Remove="Views\Images\Employees.png" />
     <None Remove="Views\Images\fingerprint.gif" />
+    <None Remove="Views\Images\icon.ico" />
     <None Remove="Views\Images\key-icon.png" />
+    <None Remove="Views\Images\Reports.png" />
+    <None Remove="Views\Images\search.png" />
     <None Remove="Views\Images\user-icon.png" />
+    <None Remove="Views\MessageBox\Images\error.gif" />
+    <None Remove="Views\MessageBox\Images\success.gif" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,16 +27,34 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Views\Images\Employees.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\fingerprint.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Views\Images\fpLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Views\Images\icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\key-icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Views\Images\Reports.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\search.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\user-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\MessageBox\Images\error.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\MessageBox\Images\success.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

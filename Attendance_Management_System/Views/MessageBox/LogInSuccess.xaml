@@ -1,0 +1,120 @@
+﻿<Window x:Class="Attendance_Management_System.Views.MessageBox.LogInSuccess"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Attendance_Management_System.Views.MessageBox"
+        mc:Ignorable="d"
+        Title="Log In Success" 
+        Height="350" 
+        Width="250"
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" 
+        AllowsTransparency="True"
+        Background="Transparent"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"       
+        xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"        
+        x:Name="Log_In_Success">
+    <Border CornerRadius="12">
+
+        <Border CornerRadius="10"                    
+            BorderThickness="2"
+            Opacity="0.95">
+
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <materialDesign:TransitioningContent>
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="SlideInFromBottom" Duration="0:0:1.0"/>
+                        <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8"/>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Border CornerRadius="10"               
+            BorderThickness="2" Opacity="0.95">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#462AD8" Offset="0"/>
+                                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                    <GradientStop Color="#8A16C1" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <Image Margin="0,0,0,0" gif:AnimationBehavior.SourceUri="Images/success.gif" Width="200" Height="150">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1" CenterX="0.5" CenterY="0.5" />
+                                </Image.RenderTransform>
+
+                            </Image>
+                        </Border>
+
+                        <TextBlock Margin="10,10,10,10" Text="Log In SuccessFull"
+                               FontSize="22"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center">
+                            <TextBlock.Foreground>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#2af598" Offset="1"/>
+                                    <GradientStop Color="#009efd" Offset="0.3"/>
+                                </LinearGradientBrush>
+                            </TextBlock.Foreground>
+                        </TextBlock>
+
+                        <Button x:Name="btnOK"
+        Command="{Binding LoginCommand}"
+        Margin="0,10,0,0"                           
+        BorderThickness="0"
+        Content="OK"
+        Foreground="White"
+        FontSize="12"
+        FontFamily="Montserrat"
+        Cursor="Hand"
+        Click="btnOK_Click">
+
+
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#462AD8"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#28AEED"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Width="75" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </materialDesign:TransitioningContent>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

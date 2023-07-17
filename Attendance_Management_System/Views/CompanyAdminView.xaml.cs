@@ -40,6 +40,18 @@ namespace Attendance_Management_System.Views
             WindowState = WindowState.Minimized;
         }
 
+        private void btnMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal; 
+            }
+            else
+            {
+                WindowState = WindowState.Maximized; 
+            }
+        }
+
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
