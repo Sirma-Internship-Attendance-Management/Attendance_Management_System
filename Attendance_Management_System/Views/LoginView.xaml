@@ -254,6 +254,7 @@
                             </customcontrols:BindablePasswordBox>
                             <Button x:Name="btnLogin"
         Command="{Binding LoginCommand}"
+        Margin="0,30,0,0"                           
         BorderThickness="0"
         Content="LOG IN"
         Foreground="White"
