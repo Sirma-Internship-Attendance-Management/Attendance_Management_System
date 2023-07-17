@@ -1,27 +1,18 @@
 ﻿using Attendance_Management_System.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Attendance_Management_System.Views
 {
-    
     public partial class LoginView : Window
     {
+        private readonly LoginViewModel _viewModel;
+
         public LoginView()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            _viewModel = new LoginViewModel();
+            DataContext = _viewModel;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -40,6 +31,10 @@ namespace Attendance_Management_System.Views
             Application.Current.Shutdown();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e) { }
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if (_viewModel.LoginCommand.CanExecute(null))
+                _viewModel.LoginCommand.Execute(null);
+        }
     }
 }

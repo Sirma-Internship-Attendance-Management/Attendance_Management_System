@@ -14,11 +14,7 @@ namespace Attendance_Management_System.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string _username;
-        private string _password;
         private SecureString _securePassword;
-
-        
-        public ICommand GoToForgotPasswordCommand { get; set; }
 
         public string Username
         {
@@ -27,18 +23,6 @@ namespace Attendance_Management_System.ViewModels
             {
                 _username = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Username)));
-            }
-        }
-
-        public string Password
-        {
-            get { return _password; }
-            set
-            {
-                
-                _password = ConvertSecureStringToString(SecurePassword);
-                //_password = value;
-                //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Password)));
             }
         }
 
@@ -56,21 +40,23 @@ namespace Attendance_Management_System.ViewModels
 
         public LoginViewModel()
         {
-            LoginCommand = new RelayCommand(Login, CanLogin);            
+            LoginCommand = new RelayCommand(Login, CanLogin);
         }
 
         private void Login(object parameter)
         {
             string username = Username;
-            string password = Password;
+            string password = ConvertSecureStringToString(SecurePassword);
 
             bool isAuthenticated = AuthenticateUser(username, password);
 
             if (isAuthenticated)
             {
                 MessageBox.Show("Login successful!");
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
+
+                CompanyAdminView companyAdminView = new CompanyAdminView();
+                companyAdminView.Show();
+
                 Application.Current.MainWindow?.Close();
             }
             else
@@ -81,7 +67,7 @@ namespace Attendance_Management_System.ViewModels
 
         private bool CanLogin(object parameter)
         {
-            return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
+            return !string.IsNullOrEmpty(Username) && SecurePassword != null && SecurePassword.Length > 0;
         }
 
         private bool AuthenticateUser(string username, string password)
@@ -91,7 +77,7 @@ namespace Attendance_Management_System.ViewModels
             return (username == storedUsername && password == storedPassword);
         }
 
-        static string ConvertSecureStringToString(SecureString secureString)
+        private string ConvertSecureStringToString(SecureString secureString)
         {
             IntPtr unmanagedString = IntPtr.Zero;
             try
@@ -105,7 +91,5 @@ namespace Attendance_Management_System.ViewModels
                 Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
             }
         }
-
-        
     }
 }
