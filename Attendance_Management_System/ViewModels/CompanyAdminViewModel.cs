@@ -13,18 +13,24 @@ namespace Attendance_Management_System.ViewModels
     {
 
         public ICommand OpenViewCommand { get; }
+        public RelayCommand OpenCommand { get; }
+
         public CompanyAdminViewModel()
         {
-            OpenViewCommand = new RelayCommand(OpenView);
+            OpenCommand = new RelayCommand(OpenEmployeeManagementView);
         }
 
-        private void OpenView(object parameter)
+        private void OpenEmployeeManagementView(object parameter)
         {
-
-
             EmployeeManagementView empman = new EmployeeManagementView();
             empman.Show();
+        }
 
+
+        private void OpenView(object parameter)
+        {         
+            EmployeeManagementView empman = new EmployeeManagementView();
+            empman.Show();
             Application.Current.MainWindow?.Close();
 
         }

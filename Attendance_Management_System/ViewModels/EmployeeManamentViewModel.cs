@@ -65,6 +65,7 @@ namespace Attendance_Management_System.ViewModels
         public RelayCommand CheckOutCommand { get; }
         public RelayCommand GenerateAttendanceReportCommand { get; }
 
+
         public EmployeeManagementViewModel()
         {
             AddEmployeeCommand = new RelayCommand(AddEmployee);
@@ -85,7 +86,6 @@ namespace Attendance_Management_System.ViewModels
             LoadEvents();
             LoadAttendance();
         }
-
 
         private void LoadEmployees()
         {
@@ -331,24 +331,21 @@ namespace Attendance_Management_System.ViewModels
 
         private Event GetSelectedEvent()
         {
-
             return Events.FirstOrDefault();
         }
+
         private DateTime GetSelectedStartDate()
         {
-
             return StartDatePicker.SelectedDate ?? DateTime.MinValue;
         }
 
         private DateTime GetSelectedEndDate()
         {
-
             return EndDatePicker.SelectedDate ?? DateTime.MaxValue;
         }
 
         private Employee GetSelectedEmployee()
         {
-
             return EmployeeListBox.SelectedItem as Employee;
         }
 
@@ -400,7 +397,5 @@ namespace Attendance_Management_System.ViewModels
             // Enable the report generation if there is at least one attendance record
             return Attendance.Count > 0;
         }
-
-
     }
 }
