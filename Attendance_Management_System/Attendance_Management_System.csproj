@@ -12,6 +12,7 @@
     <None Remove="Views\Images\Employees.png" />
     <None Remove="Views\Images\fingerprint.gif" />
     <None Remove="Views\Images\icon.ico" />
+    <None Remove="Views\Images\img_exit.png" />
     <None Remove="Views\Images\key-icon.png" />
     <None Remove="Views\Images\Reports.png" />
     <None Remove="Views\Images\search.png" />
@@ -37,6 +38,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Views\Images\icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\img_exit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Views\Images\key-icon.png">

@@ -1,4 +1,5 @@
 ﻿using Attendance_Management_System.ViewModels;
+using Attendance_Management_System.Views.MessageBox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +61,13 @@ namespace Attendance_Management_System.Views
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
             _viewModel.OpenViewCommand.Execute(null);
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            LogoutNotification lgn = new LogoutNotification();
+            lgn.ShowDialog();
+            this.Close();
         }
     }
 }

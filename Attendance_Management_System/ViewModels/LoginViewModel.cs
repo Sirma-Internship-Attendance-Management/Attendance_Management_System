@@ -57,6 +57,7 @@ namespace Attendance_Management_System.ViewModels
                 LogInSuccess lgs = new LogInSuccess();
                 lgs.ShowDialog();
                 
+
                 /*MessageBox.Show("Login successful!");
 
                 CompanyAdminView companyAdminView = new CompanyAdminView();

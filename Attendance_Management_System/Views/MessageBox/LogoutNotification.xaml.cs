@@ -15,24 +15,22 @@ using System.Windows.Shapes;
 namespace Attendance_Management_System.Views.MessageBox
 {
     /// <summary>
-    /// Interaction logic for LogInSuccess.xaml
+    /// Interaction logic for LogoutNotification.xaml
     /// </summary>
-    public partial class LogInSuccess : Window
+    public partial class LogoutNotification : Window
     {
-        public LogInSuccess()
+        public LogoutNotification()
         {
             InitializeComponent();
         }
 
-
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            CompanyAdminView companyAdminView = new CompanyAdminView();
-            companyAdminView.Show();
+            LoginView loginView = new LoginView();
+            loginView.Show();
 
-            //Application.Current.MainWindow?.Close();
+            Application.Current.MainWindow?.Close();
             this.Close();
         }
-        
     }
 }
