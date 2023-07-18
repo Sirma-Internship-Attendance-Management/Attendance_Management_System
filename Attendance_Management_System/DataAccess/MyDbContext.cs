@@ -1,22 +1,20 @@
 ﻿using Attendance_Management_System.Models;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Attendance_Management_System.DataAccess
 {
     public class MyDbContext : DbContext
     {
         public DbSet<Company> Companies { get; set; }
-        // Add other DbSets for your data models
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Attendance> AttendanceRecords { get; set; }
 
-        public MyDbContext() : base()
+        public MyDbContext() : base(Properties.Settings.Default.DbConnect)
         {
         }
+
         public Company GetCompanyById(int companyId)
         {
             return Companies.FirstOrDefault(c => c.CompanyId == companyId);

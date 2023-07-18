@@ -16,7 +16,6 @@ namespace Attendance_Management_System.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         private ObservableCollection<Employee> _employees;
-        private ObservableCollection<Event> _events;
         private ObservableCollection<Attendance> _attendance;
         private string _connectionString = "dbConnect";
 
@@ -35,16 +34,6 @@ namespace Attendance_Management_System.ViewModels
             }
         }
 
-        public ObservableCollection<Event> Events
-        {
-            get { return _events; }
-            set
-            {
-                _events = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Events)));
-            }
-        }
-
         public ObservableCollection<Attendance> Attendance
         {
             get { return _attendance; }
@@ -58,32 +47,23 @@ namespace Attendance_Management_System.ViewModels
         public RelayCommand AddEmployeeCommand { get; }
         public RelayCommand EditEmployeeCommand { get; }
         public RelayCommand DeleteEmployeeCommand { get; }
-        public RelayCommand AddEventCommand { get; }
-        public RelayCommand EditEventCommand { get; }
-        public RelayCommand DeleteEventCommand { get; }
         public RelayCommand CheckInCommand { get; }
         public RelayCommand CheckOutCommand { get; }
         public RelayCommand GenerateAttendanceReportCommand { get; }
-
 
         public EmployeeManagementViewModel()
         {
             AddEmployeeCommand = new RelayCommand(AddEmployee);
             EditEmployeeCommand = new RelayCommand(EditEmployee, CanEditOrDeleteEmployee);
             DeleteEmployeeCommand = new RelayCommand(DeleteEmployee, CanEditOrDeleteEmployee);
-            AddEventCommand = new RelayCommand(AddEvent);
-            EditEventCommand = new RelayCommand(EditEvent, CanEditOrDeleteEvent);
-            DeleteEventCommand = new RelayCommand(DeleteEvent, CanEditOrDeleteEvent);
             CheckInCommand = new RelayCommand(CheckIn, CanCheckIn);
             CheckOutCommand = new RelayCommand(CheckOut, CanCheckOut);
             GenerateAttendanceReportCommand = new RelayCommand(GenerateAttendanceReport, CanGenerateAttendanceReport);
 
             Employees = new ObservableCollection<Employee>();
-            Events = new ObservableCollection<Event>();
             Attendance = new ObservableCollection<Attendance>();
 
             LoadEmployees();
-            LoadEvents();
             LoadAttendance();
         }
 
@@ -121,42 +101,6 @@ namespace Attendance_Management_System.ViewModels
             }
         }
 
-        private void LoadEvents()
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-
-                string query = "SELECT * FROM Events";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            int eventId = reader.GetInt32(0);
-                            string eventName = reader.GetString(1);
-                            DateTime eventDate = reader.GetDateTime(2);
-                            string venue = reader.GetString(3);
-                            string additionalInformation = reader.GetString(4);
-
-                            Event @event = new Event
-                            {
-                                EventId = eventId,
-                                EventName = eventName,
-                                EventDate = eventDate,
-                                Venue = venue,
-                                AdditionalInformation = additionalInformation
-                            };
-
-                            Events.Add(@event);
-                        }
-                    }
-                }
-            }
-        }
-
         private void LoadAttendance()
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -173,15 +117,13 @@ namespace Attendance_Management_System.ViewModels
                         {
                             int attendanceId = reader.GetInt32(0);
                             int employeeId = reader.GetInt32(1);
-                            int eventId = reader.GetInt32(2);
-                            DateTime checkInTime = reader.GetDateTime(3);
-                            DateTime? checkOutTime = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4);
+                            DateTime checkInTime = reader.GetDateTime(2);
+                            DateTime? checkOutTime = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3);
 
                             Attendance attendance = new Attendance
                             {
                                 AttendanceId = attendanceId,
                                 EmployeeId = employeeId,
-                                EventId = eventId,
                                 CheckInTime = checkInTime,
                                 CheckOutTime = checkOutTime
                             };
@@ -226,64 +168,29 @@ namespace Attendance_Management_System.ViewModels
             return true;
         }
 
-        private void AddEvent(object parameter)
-        {
-            Event newEvent = new Event();
-            Events.Add(newEvent);
-        }
-
-        private void EditEvent(object parameter)
-        {
-            Event selectedEvent = parameter as Event;
-            if (selectedEvent != null)
-            {
-                // Update selectedEvent in the database
-            }
-        }
-
-        private void DeleteEvent(object parameter)
-        {
-            Event selectedEvent = parameter as Event;
-            if (selectedEvent != null)
-            {
-                MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete the event {selectedEvent.EventName}?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    Events.Remove(selectedEvent);
-                }
-            }
-        }
-
-        private bool CanEditOrDeleteEvent(object parameter)
-        {
-            return true;
-        }
-
         private void CheckIn(object parameter)
         {
             Employee selectedEmployee = parameter as Employee;
-            Event selectedEvent = GetSelectedEvent();
 
-            if (selectedEmployee != null && selectedEvent != null)
+            if (selectedEmployee != null)
             {
-                // Check if the employee is already checked in for the selected event
-                bool alreadyCheckedIn = Attendance.Any(a => a.EmployeeId == selectedEmployee.EmployeeId && a.EventId == selectedEvent.EventId);
+                // Check if the employee is already checked in
+                bool alreadyCheckedIn = Attendance.Any(a => a.EmployeeId == selectedEmployee.EmployeeId);
 
                 if (alreadyCheckedIn)
                 {
-                    MessageBox.Show($"Employee {selectedEmployee.Name} is already checked in for the event {selectedEvent.EventName}.");
+                    MessageBox.Show($"Employee {selectedEmployee.Name} is already checked in.");
                 }
                 else
                 {
                     Attendance newAttendance = new Attendance
                     {
                         EmployeeId = selectedEmployee.EmployeeId,
-                        EventId = selectedEvent.EventId,
                         CheckInTime = DateTime.Now
                     };
 
                     Attendance.Add(newAttendance);
-                    MessageBox.Show($"Employee {selectedEmployee.Name} checked in for the event {selectedEvent.EventName}.");
+                    MessageBox.Show($"Employee {selectedEmployee.Name} checked in.");
                 }
             }
         }
@@ -291,29 +198,27 @@ namespace Attendance_Management_System.ViewModels
         private bool CanCheckIn(object parameter)
         {
             Employee selectedEmployee = parameter as Employee;
-            Event selectedEvent = GetSelectedEvent();
 
-            return selectedEmployee != null && selectedEvent != null;
+            return selectedEmployee != null;
         }
 
         private void CheckOut(object parameter)
         {
             Employee selectedEmployee = parameter as Employee;
-            Event selectedEvent = GetSelectedEvent();
 
-            if (selectedEmployee != null && selectedEvent != null)
+            if (selectedEmployee != null)
             {
-                // Find the attendance record for the selected employee and event
-                Attendance attendance = Attendance.FirstOrDefault(a => a.EmployeeId == selectedEmployee.EmployeeId && a.EventId == selectedEvent.EventId);
+                // Find the attendance record for the selected employee
+                Attendance attendance = Attendance.FirstOrDefault(a => a.EmployeeId == selectedEmployee.EmployeeId);
 
                 if (attendance != null)
                 {
                     attendance.CheckOutTime = DateTime.Now;
-                    MessageBox.Show($"Employee {selectedEmployee.Name} checked out of the event {selectedEvent.EventName}.");
+                    MessageBox.Show($"Employee {selectedEmployee.Name} checked out.");
                 }
                 else
                 {
-                    MessageBox.Show($"Employee {selectedEmployee.Name} has not checked in for the event {selectedEvent.EventName}.");
+                    MessageBox.Show($"Employee {selectedEmployee.Name} has not checked in.");
                 }
             }
         }
@@ -321,17 +226,56 @@ namespace Attendance_Management_System.ViewModels
         private bool CanCheckOut(object parameter)
         {
             Employee selectedEmployee = parameter as Employee;
-            Event selectedEvent = GetSelectedEvent();
 
-            // Check if the employee is already checked in for the selected event
-            bool alreadyCheckedIn = Attendance.Any(a => a.EmployeeId == selectedEmployee.EmployeeId && a.EventId == selectedEvent.EventId);
+            // Check if the employee is already checked in
+            bool alreadyCheckedIn = Attendance.Any(a => a.EmployeeId == selectedEmployee.EmployeeId);
 
-            return selectedEmployee != null && selectedEvent != null && alreadyCheckedIn;
+            return selectedEmployee != null && alreadyCheckedIn;
         }
 
-        private Event GetSelectedEvent()
+        private void GenerateAttendanceReport(object parameter)
         {
-            return Events.FirstOrDefault();
+            // Get the selected criteria for generating the report
+            DateTime startDate = GetSelectedStartDate();
+            DateTime endDate = GetSelectedEndDate(); 
+            Employee selectedEmployee = GetSelectedEmployee(); 
+
+           
+            var filteredAttendance = Attendance.Where(a =>
+                (startDate == default || a.CheckInTime.Date >= startDate) &&
+                (endDate == default || a.CheckInTime.Date <= endDate) &&
+                (selectedEmployee == null || a.EmployeeId == selectedEmployee.EmployeeId)
+            );
+
+            // Generate the report based on the filtered attendance records
+            StringBuilder report = new StringBuilder();
+            report.AppendLine("Attendance Report");
+            report.AppendLine("------------------------------");
+            report.AppendLine($"Start Date: {startDate}");
+            report.AppendLine($"End Date: {endDate}");
+            report.AppendLine();
+
+            foreach (var attendance in filteredAttendance)
+            {
+                Employee employee = Employees.FirstOrDefault(e => e.EmployeeId == attendance.EmployeeId);
+
+                if (employee != null)
+                {
+                    report.AppendLine($"Employee: {employee.Name}");
+                    report.AppendLine($"Check-In Time: {attendance.CheckInTime}");
+                    report.AppendLine($"Check-Out Time: {attendance.CheckOutTime?.ToString() ?? "N/A"}");
+                    report.AppendLine("------------------------------");
+                }
+            }
+
+            // Display the report or save it to a file, depending on your requirements
+            MessageBox.Show(report.ToString(), "Attendance Report");
+        }
+
+        private bool CanGenerateAttendanceReport(object parameter)
+        {
+            // Enable the report generation if there is at least one attendance record
+            return Attendance.Count > 0;
         }
 
         private DateTime GetSelectedStartDate()
@@ -347,55 +291,6 @@ namespace Attendance_Management_System.ViewModels
         private Employee GetSelectedEmployee()
         {
             return EmployeeListBox.SelectedItem as Employee;
-        }
-
-        private void GenerateAttendanceReport(object parameter)
-        {
-            // Get the selected criteria for generating the report
-            DateTime startDate = GetSelectedStartDate(); // Replace with the code to get the selected start date from the UI
-            DateTime endDate = GetSelectedEndDate(); // Replace with the code to get the selected end date from the UI
-            Employee selectedEmployee = GetSelectedEmployee(); // Replace with the code to get the selected employee from the UI
-            Event selectedEvent = GetSelectedEvent(); // Replace with the code to get the selected event from the UI
-
-            // Filter the attendance records based on the selected criteria
-            var filteredAttendance = Attendance.Where(a =>
-                (startDate == default || a.CheckInTime.Date >= startDate) &&
-                (endDate == default || a.CheckInTime.Date <= endDate) &&
-                (selectedEmployee == null || a.EmployeeId == selectedEmployee.EmployeeId) &&
-                (selectedEvent == null || a.EventId == selectedEvent.EventId)
-            );
-
-            // Generate the report based on the filtered attendance records
-            StringBuilder report = new StringBuilder();
-            report.AppendLine("Attendance Report");
-            report.AppendLine("------------------------------");
-            report.AppendLine($"Start Date: {startDate}");
-            report.AppendLine($"End Date: {endDate}");
-            report.AppendLine();
-
-            foreach (var attendance in filteredAttendance)
-            {
-                Employee employee = Employees.FirstOrDefault(e => e.EmployeeId == attendance.EmployeeId);
-                Event @event = Events.FirstOrDefault(ev => ev.EventId == attendance.EventId);
-
-                if (employee != null && @event != null)
-                {
-                    report.AppendLine($"Employee: {employee.Name}");
-                    report.AppendLine($"Event: {@event.EventName}");
-                    report.AppendLine($"Check-In Time: {attendance.CheckInTime}");
-                    report.AppendLine($"Check-Out Time: {attendance.CheckOutTime?.ToString() ?? "N/A"}");
-                    report.AppendLine("------------------------------");
-                }
-            }
-
-            // Display the report or save it to a file, depending on your requirements
-            MessageBox.Show(report.ToString(), "Attendance Report");
-        }
-
-        private bool CanGenerateAttendanceReport(object parameter)
-        {
-            // Enable the report generation if there is at least one attendance record
-            return Attendance.Count > 0;
         }
     }
 }

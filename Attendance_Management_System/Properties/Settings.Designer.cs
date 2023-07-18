@@ -26,6 +26,8 @@ namespace Attendance_Management_System.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-2NBNJT4;Initial Catalog=Attendance_ManagementDB;Integrated Se" +
+            "curity=True")]
         public string DbConnect {
             get {
                 return ((string)(this["DbConnect"]));
