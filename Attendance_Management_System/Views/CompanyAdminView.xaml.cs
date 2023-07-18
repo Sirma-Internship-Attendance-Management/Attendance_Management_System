@@ -22,8 +22,8 @@ namespace Attendance_Management_System.Views
     /// </summary>
     public partial class CompanyAdminView : Window
     {
-
         private readonly CompanyAdminViewModel _viewModel;
+
         public CompanyAdminView()
         {
             InitializeComponent();
@@ -46,11 +46,11 @@ namespace Attendance_Management_System.Views
         {
             if (WindowState == WindowState.Maximized)
             {
-                WindowState = WindowState.Normal; 
+                WindowState = WindowState.Normal;
             }
             else
             {
-                WindowState = WindowState.Maximized; 
+                WindowState = WindowState.Maximized;
             }
         }
 
@@ -61,7 +61,7 @@ namespace Attendance_Management_System.Views
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.OpenViewCommand.Execute(null);
+            _viewModel.OpenCommand.Execute(null);
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -70,9 +70,9 @@ namespace Attendance_Management_System.Views
             lgn.ShowDialog();
             this.Close();
         }
+
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
-           
         }
         private void btnAccount_Click(object sender, RoutedEventArgs e)
         {
