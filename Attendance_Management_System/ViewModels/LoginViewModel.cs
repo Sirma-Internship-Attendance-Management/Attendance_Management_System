@@ -80,12 +80,11 @@ namespace Attendance_Management_System.ViewModels
 
         private bool AuthenticateAdmin(string username, string password)
         {
-            // Retrieve company admin credentials from the Company model or any other secure storage
+
             Company storedCompany = GetCompanyByAdminCredentials(username, password);
 
             if (storedCompany != null)
             {
-                // Compare the provided password with the stored admin password
                 return password == storedCompany.AdminPassword;
             }
 

@@ -1,9 +1,6 @@
 ﻿using Attendance_Management_System.Commands;
-using Attendance_Management_System.Models;
 using Attendance_Management_System.Views;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,13 +8,13 @@ namespace Attendance_Management_System.ViewModels
 {
     public class CompanyAdminViewModel : INotifyPropertyChanged
     {
-
-        public ICommand OpenViewCommand { get; }
-        public RelayCommand OpenCommand { get; }
+        public ICommand OpenCommand { get; }
+        public ICommand OpenCommand2 { get; }
 
         public CompanyAdminViewModel()
         {
             OpenCommand = new RelayCommand(OpenEmployeeManagementView);
+            OpenCommand2 = new RelayCommand(OpenAttendanceView);
         }
 
         private void OpenEmployeeManagementView(object parameter)
@@ -26,15 +23,12 @@ namespace Attendance_Management_System.ViewModels
             empman.Show();
         }
 
-
-        private void OpenView(object parameter)
-        {         
-            EmployeeManagementView empman = new EmployeeManagementView();
-            empman.Show();
-            Application.Current.MainWindow?.Close();
-
+        private void OpenAttendanceView(object parameter)
+        {
+            AttendanceView attendanceView = new AttendanceView();
+            attendanceView.Show();
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

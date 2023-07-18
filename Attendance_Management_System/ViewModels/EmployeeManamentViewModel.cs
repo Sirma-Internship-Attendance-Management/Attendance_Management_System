@@ -19,7 +19,7 @@ namespace Attendance_Management_System.ViewModels
         private ObservableCollection<Attendance> _attendance;
         private string _connectionString = "dbConnect";
 
-        // Add properties for the UI controls
+        
         public DatePicker StartDatePicker { get; set; }
         public DatePicker EndDatePicker { get; set; }
         public ListBox EmployeeListBox { get; set; }
@@ -174,7 +174,6 @@ namespace Attendance_Management_System.ViewModels
 
             if (selectedEmployee != null)
             {
-                // Check if the employee is already checked in
                 bool alreadyCheckedIn = Attendance.Any(a => a.EmployeeId == selectedEmployee.EmployeeId);
 
                 if (alreadyCheckedIn)
@@ -208,7 +207,6 @@ namespace Attendance_Management_System.ViewModels
 
             if (selectedEmployee != null)
             {
-                // Find the attendance record for the selected employee
                 Attendance attendance = Attendance.FirstOrDefault(a => a.EmployeeId == selectedEmployee.EmployeeId);
 
                 if (attendance != null)
@@ -227,7 +225,6 @@ namespace Attendance_Management_System.ViewModels
         {
             Employee selectedEmployee = parameter as Employee;
 
-            // Check if the employee is already checked in
             bool alreadyCheckedIn = Attendance.Any(a => a.EmployeeId == selectedEmployee.EmployeeId);
 
             return selectedEmployee != null && alreadyCheckedIn;
@@ -235,7 +232,6 @@ namespace Attendance_Management_System.ViewModels
 
         private void GenerateAttendanceReport(object parameter)
         {
-            // Get the selected criteria for generating the report
             DateTime startDate = GetSelectedStartDate();
             DateTime endDate = GetSelectedEndDate(); 
             Employee selectedEmployee = GetSelectedEmployee(); 
@@ -247,7 +243,6 @@ namespace Attendance_Management_System.ViewModels
                 (selectedEmployee == null || a.EmployeeId == selectedEmployee.EmployeeId)
             );
 
-            // Generate the report based on the filtered attendance records
             StringBuilder report = new StringBuilder();
             report.AppendLine("Attendance Report");
             report.AppendLine("------------------------------");
@@ -268,13 +263,11 @@ namespace Attendance_Management_System.ViewModels
                 }
             }
 
-            // Display the report or save it to a file, depending on your requirements
             MessageBox.Show(report.ToString(), "Attendance Report");
         }
 
         private bool CanGenerateAttendanceReport(object parameter)
         {
-            // Enable the report generation if there is at least one attendance record
             return Attendance.Count > 0;
         }
 
