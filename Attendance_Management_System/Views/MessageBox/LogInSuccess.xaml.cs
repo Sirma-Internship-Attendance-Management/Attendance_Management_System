@@ -30,7 +30,7 @@ namespace Attendance_Management_System.Views.MessageBox
             CompanyAdminView companyAdminView = new CompanyAdminView();
             companyAdminView.Show();
 
-            //Application.Current.MainWindow?.Close();
+            Application.Current.MainWindow?.Close();
             this.Close();
         }
         

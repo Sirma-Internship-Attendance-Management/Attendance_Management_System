@@ -69,5 +69,9 @@ namespace Attendance_Management_System.Views
             lgn.ShowDialog();
             this.Close();
         }
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
     }
 }

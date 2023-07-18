@@ -16,6 +16,7 @@
     <None Remove="Views\Images\key-icon.png" />
     <None Remove="Views\Images\Reports.png" />
     <None Remove="Views\Images\search.png" />
+    <None Remove="Views\Images\settings.png" />
     <None Remove="Views\Images\user-icon.png" />
     <None Remove="Views\MessageBox\Images\error.gif" />
     <None Remove="Views\MessageBox\Images\success.gif" />
@@ -41,6 +42,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Views\Images\img_exit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\settings.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Views\Images\key-icon.png">
