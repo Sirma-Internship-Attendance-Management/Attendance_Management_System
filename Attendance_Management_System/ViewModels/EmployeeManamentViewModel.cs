@@ -92,6 +92,7 @@ namespace Attendance_Management_System.ViewModels
         {
             Employee newEmployee = new Employee();
             Employees.Add(newEmployee);
+            LoadEmployees();
         }
 
         private void EditEmployee(object parameter)
