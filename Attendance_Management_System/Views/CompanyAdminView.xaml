@@ -373,8 +373,9 @@
 
                             <Button Name="btnLogout"                                
                                  Cursor="Hand"        
-                                 Click="Logout_Click"
+                                    Click="Logout_Click"                                  
                                 Background="Transparent" >
+                                <!--Command="{Binding LogoutCommand}"-->
                             
                             <StackPanel Orientation="Horizontal"  >
                                 <!--Cursor="Hand"        

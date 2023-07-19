@@ -28,8 +28,6 @@ namespace Attendance_Management_System.Views.MessageBox
         {
             LoginView loginView = new LoginView();
             loginView.Show();
-
-            Application.Current.MainWindow?.Close();
             this.Close();
         }
     }

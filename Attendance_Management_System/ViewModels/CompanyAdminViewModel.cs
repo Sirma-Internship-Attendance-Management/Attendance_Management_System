@@ -17,6 +17,7 @@ namespace Attendance_Management_System.ViewModels
         public ICommand SettingsCommand { get; }
 
         public ICommand InfoCommand { get; }
+        public ICommand LogoutCommand { get; }
 
         //public string uc = "Under Construction!";
 
@@ -27,6 +28,7 @@ namespace Attendance_Management_System.ViewModels
             AccountCommand = new RelayCommand(OpenAccountManagmentView);
             SettingsCommand = new RelayCommand(OpenSettingsView);
             InfoCommand = new RelayCommand(OpenInfoView);
+            LogoutCommand = new RelayCommand(OpenLogoutMB);
         }
 
         private void OpenEmployeeManagementView(object parameter)
@@ -58,6 +60,16 @@ namespace Attendance_Management_System.ViewModels
         {
             UnderConstruction uc = new UnderConstruction();
             uc.ShowDialog();
+        }
+
+        private void OpenLogoutMB (object parameter)
+        {
+
+            //Application.Current.MainWindow?.Close();
+            LogoutNotification lgn = new LogoutNotification();
+            lgn.ShowDialog();
+            
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
