@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Attendance_Management_System.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace Attendance_Management_System.Views
     /// </summary>
     public partial class EmployeeManagementView : Window
     {
+        
+
         public EmployeeManagementView()
         {
             InitializeComponent();
+            
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -57,5 +61,7 @@ namespace Attendance_Management_System.Views
             AddEmployeeView addEmployeeView = new AddEmployeeView();
             addEmployeeView.ShowDialog();
         }
+
+        
     }
 }

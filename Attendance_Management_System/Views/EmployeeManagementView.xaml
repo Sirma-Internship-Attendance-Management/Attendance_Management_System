@@ -185,7 +185,7 @@
                 <Button Content="Delete Employee" Command="{Binding DeleteEmployeeCommand}"/>
             </StackPanel>
         </StackPanel>
-    </Grid>
+            </Grid>
     </Border>
     </Border>
 </Window>
