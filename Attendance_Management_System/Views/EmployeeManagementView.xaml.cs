@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Attendance_Management_System.Models;
 using Attendance_Management_System.ViewModels;
 namespace Attendance_Management_System.Views
 {
@@ -60,12 +61,16 @@ namespace Attendance_Management_System.Views
         }
         private void DeleteEmployee_Click(object sender, RoutedEventArgs e)
         {
+            // Get the selected employee from the data grid
+            Employee selectedEmployee = EmployeeDataGrid.SelectedItem as Employee;
+
             // Invoke the DeleteEmployeeCommand in the ViewModel
-            if (DataContext is EmployeeManagementViewModel viewModel)
+            if (DataContext is EmployeeManagementViewModel viewModel && selectedEmployee != null)
             {
-                viewModel.DeleteEmployeeCommand.Execute(null);
+                viewModel.DeleteEmployeeCommand.Execute(selectedEmployee);
             }
         }
+
 
 
     }
