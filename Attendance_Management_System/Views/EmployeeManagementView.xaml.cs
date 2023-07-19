@@ -70,6 +70,30 @@ namespace Attendance_Management_System.Views
                 viewModel.DeleteEmployeeCommand.Execute(selectedEmployee);
             }
         }
+        private void CheckIn_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the selected employee from the data grid
+            Employee selectedEmployee = EmployeeDataGrid.SelectedItem as Employee;
+
+            // Invoke the CheckInCommand in the ViewModel
+            if (DataContext is EmployeeManagementViewModel viewModel && selectedEmployee != null)
+            {
+                viewModel.CheckInCommand.Execute(selectedEmployee);
+            }
+        }
+
+        private void CheckOut_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the selected employee from the data grid
+            Employee selectedEmployee = EmployeeDataGrid.SelectedItem as Employee;
+
+            // Invoke the CheckOutCommand in the ViewModel
+            if (DataContext is EmployeeManagementViewModel viewModel && selectedEmployee != null)
+            {
+                viewModel.CheckOutCommand.Execute(selectedEmployee);
+            }
+        }
+
 
 
 

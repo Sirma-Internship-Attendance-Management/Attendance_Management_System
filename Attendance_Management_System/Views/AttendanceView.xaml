@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Attendance_Management_System.Views"        
-        xmlns:customcontrols="clr-namespace:Attendance_Management_System.CustomControls"
         xmlns:vm="clr-namespace:Attendance_Management_System.ViewModels"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"        
@@ -177,7 +176,6 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Attendance ID" Binding="{Binding AttendanceId}" Width="*"/>
                             <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeId}" Width="*"/>
-                            <DataGridTextColumn Header="Event ID" Binding="{Binding EventId}" Width="*"/>
                             <DataGridTextColumn Header="Check-In Time" Binding="{Binding CheckInTime}" Width="*"/>
                             <DataGridTextColumn Header="Check-Out Time" Binding="{Binding CheckOutTime}" Width="*"/>
                         </DataGrid.Columns>

@@ -1,29 +1,21 @@
 ﻿using Attendance_Management_System.Commands;
+using Attendance_Management_System.DataAccess;
 using Attendance_Management_System.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using Attendance_Management_System.Views;
-using Attendance_Management_System.DataAccess;
+using System.Windows.Input;
 
 namespace Attendance_Management_System.ViewModels
 {
     public class EmployeeManagementViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private ObservableCollection<Employee> _employees;
         private ObservableCollection<Attendance> _attendance;
-        private string _connectionString = "DbConnect";
 
-        public DatePicker StartDatePicker { get; set; }
-        public DatePicker EndDatePicker { get; set; }
-        public ListBox EmployeeListBox { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<Employee> Employees
         {
@@ -50,8 +42,6 @@ namespace Attendance_Management_System.ViewModels
         public RelayCommand DeleteEmployeeCommand { get; }
         public RelayCommand CheckInCommand { get; }
         public RelayCommand CheckOutCommand { get; }
-        public RelayCommand GenerateAttendanceReportCommand { get; }
-        public RelayCommand SaveEmployeeCommand { get; }
 
         public EmployeeManagementViewModel()
         {
@@ -60,8 +50,6 @@ namespace Attendance_Management_System.ViewModels
             DeleteEmployeeCommand = new RelayCommand(DeleteEmployee, CanEditOrDeleteEmployee);
             CheckInCommand = new RelayCommand(CheckIn, CanCheckIn);
             CheckOutCommand = new RelayCommand(CheckOut, CanCheckOut);
-            GenerateAttendanceReportCommand = new RelayCommand(GenerateAttendanceReport, CanGenerateAttendanceReport);
-            SaveEmployeeCommand = new RelayCommand(SaveEmployee);
 
             Employees = new ObservableCollection<Employee>();
             Attendance = new ObservableCollection<Attendance>();
@@ -69,6 +57,7 @@ namespace Attendance_Management_System.ViewModels
             LoadEmployees();
             LoadAttendance();
         }
+
         private void LoadEmployees()
         {
             using (var dbContext = new MyDbContext())
@@ -86,7 +75,6 @@ namespace Attendance_Management_System.ViewModels
                 Attendance = new ObservableCollection<Attendance>(attendanceRecords);
             }
         }
-
 
         private void AddEmployee(object parameter)
         {
@@ -128,8 +116,6 @@ namespace Attendance_Management_System.ViewModels
             }
         }
 
-
-
         private bool CanEditOrDeleteEmployee(object parameter)
         {
             return true;
@@ -149,15 +135,24 @@ namespace Attendance_Management_System.ViewModels
                 }
                 else
                 {
-                    Attendance newAttendance = new Attendance
+                    using (var dbContext = new MyDbContext())
                     {
-                        EmployeeId = selectedEmployee.EmployeeId,
-                        CheckInTime = DateTime.Now
-                    };
+                        var attendance = new Attendance
+                        {
+                            EmployeeId = selectedEmployee.EmployeeId,
+                            CheckInTime = DateTime.Now
+                        };
+                        dbContext.AttendanceRecords.Add(attendance);
+                        dbContext.SaveChanges();
+                    }
 
-                    Attendance.Add(newAttendance);
+                    LoadAttendance();
                     MessageBox.Show($"Employee {selectedEmployee.Name} checked in.");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please select a valid employee.");
             }
         }
 
@@ -174,17 +169,27 @@ namespace Attendance_Management_System.ViewModels
 
             if (selectedEmployee != null)
             {
-                Attendance attendance = Attendance.FirstOrDefault(a => a.EmployeeId == selectedEmployee.EmployeeId);
+                var attendance = Attendance.FirstOrDefault(a => a.EmployeeId == selectedEmployee.EmployeeId && a.CheckOutTime == null);
 
                 if (attendance != null)
                 {
-                    attendance.CheckOutTime = DateTime.Now;
+                    using (var dbContext = new MyDbContext())
+                    {
+                        attendance.CheckOutTime = DateTime.Now;
+                        dbContext.SaveChanges();
+                    }
+
+                    LoadAttendance();
                     MessageBox.Show($"Employee {selectedEmployee.Name} checked out.");
                 }
                 else
                 {
                     MessageBox.Show($"Employee {selectedEmployee.Name} has not checked in.");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please select a valid employee.");
             }
         }
 
@@ -196,73 +201,5 @@ namespace Attendance_Management_System.ViewModels
 
             return selectedEmployee != null && alreadyCheckedIn;
         }
-
-        private void GenerateAttendanceReport(object parameter)
-        {
-            DateTime startDate = GetSelectedStartDate();
-            DateTime endDate = GetSelectedEndDate();
-            Employee selectedEmployee = GetSelectedEmployee();
-
-
-            var filteredAttendance = Attendance.Where(a =>
-                (startDate == default || a.CheckInTime.Date >= startDate) &&
-                (endDate == default || a.CheckInTime.Date <= endDate) &&
-                (selectedEmployee == null || a.EmployeeId == selectedEmployee.EmployeeId)
-            );
-
-            StringBuilder report = new StringBuilder();
-            report.AppendLine("Attendance Report");
-            report.AppendLine("------------------------------");
-            report.AppendLine($"Start Date: {startDate}");
-            report.AppendLine($"End Date: {endDate}");
-            report.AppendLine();
-
-            foreach (var attendance in filteredAttendance)
-            {
-                Employee employee = Employees.FirstOrDefault(e => e.EmployeeId == attendance.EmployeeId);
-
-                if (employee != null)
-                {
-                    report.AppendLine($"Employee: {employee.Name}");
-                    report.AppendLine($"Check-In Time: {attendance.CheckInTime}");
-                    report.AppendLine($"Check-Out Time: {attendance.CheckOutTime?.ToString() ?? "N/A"}");
-                    report.AppendLine("------------------------------");
-                }
-            }
-
-            MessageBox.Show(report.ToString(), "Attendance Report");
-        }
-
-        private bool CanGenerateAttendanceReport(object parameter)
-        {
-            return Attendance.Count > 0;
-        }
-
-        private DateTime GetSelectedStartDate()
-        {
-            return StartDatePicker.SelectedDate ?? DateTime.MinValue;
-        }
-
-        private DateTime GetSelectedEndDate()
-        {
-            return EndDatePicker.SelectedDate ?? DateTime.MaxValue;
-        }
-
-        private Employee GetSelectedEmployee()
-        {
-            return EmployeeListBox.SelectedItem as Employee;
-        }
-
-        private void SaveEmployee(object parameter)
-        {
-            Employee employee = parameter as Employee;
-            if (employee != null)
-            {
-                Employees.Add(employee);
-
-                // Close the AddEmployeeView or perform any other necessary actions
-            }
-        }
-
     }
 }

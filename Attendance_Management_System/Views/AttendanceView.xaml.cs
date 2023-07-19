@@ -1,4 +1,5 @@
 ﻿using Attendance_Management_System.ViewModels;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
@@ -39,5 +40,6 @@ namespace Attendance_Management_System.Views
         {
             Close();
         }
+
     }
 }
