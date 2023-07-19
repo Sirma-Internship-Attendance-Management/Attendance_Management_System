@@ -46,7 +46,7 @@
                     FontFamily="Montserrat"
                     Cursor="Hand"
                     Grid.Column="1"
-                    Command="{Binding MinimizeWindowCommand}">
+                    Click="btnMinimize_Click">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="#28AEED"/>
@@ -77,7 +77,7 @@
                     FontFamily="Montserrat"
                     Cursor="Hand"
                     Grid.Column="2"
-                    Command="{Binding CloseWindowCommand}">
+                    Click="btnClose_Click">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="#DA34AE"/>
