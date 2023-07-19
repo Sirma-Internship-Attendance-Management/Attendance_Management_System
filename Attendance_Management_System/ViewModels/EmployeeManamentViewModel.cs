@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using Attendance_Management_System.Views;
+using Attendance_Management_System.DataAccess;
 
 namespace Attendance_Management_System.ViewModels
 {
@@ -18,7 +19,7 @@ namespace Attendance_Management_System.ViewModels
 
         private ObservableCollection<Employee> _employees;
         private ObservableCollection<Attendance> _attendance;
-        private string _connectionString = "dbConnect";
+        private string _connectionString = "DbConnect";
 
         public DatePicker StartDatePicker { get; set; }
         public DatePicker EndDatePicker { get; set; }
@@ -68,79 +69,30 @@ namespace Attendance_Management_System.ViewModels
             LoadEmployees();
             LoadAttendance();
         }
-
         private void LoadEmployees()
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (var dbContext = new MyDbContext())
             {
-                connection.Open();
-
-                string query = "SELECT * FROM Employees";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            int employeeId = reader.GetInt32(0);
-                            string name = reader.GetString(1);
-                            string position = reader.GetString(2);
-                            string contactDetails = reader.GetString(3);
-
-                            Employee employee = new Employee
-                            {
-                                EmployeeId = employeeId,
-                                Name = name,
-                                Position = position,
-                                ContactDetails = contactDetails
-                            };
-
-                            Employees.Add(employee);
-                        }
-                    }
-                }
+                var employees = dbContext.Employees.ToList();
+                Employees = new ObservableCollection<Employee>(employees);
             }
         }
 
         private void LoadAttendance()
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (var dbContext = new MyDbContext())
             {
-                connection.Open();
-
-                string query = "SELECT * FROM Attendance";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            int attendanceId = reader.GetInt32(0);
-                            int employeeId = reader.GetInt32(1);
-                            DateTime checkInTime = reader.GetDateTime(2);
-                            DateTime? checkOutTime = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3);
-
-                            Attendance attendance = new Attendance
-                            {
-                                AttendanceId = attendanceId,
-                                EmployeeId = employeeId,
-                                CheckInTime = checkInTime,
-                                CheckOutTime = checkOutTime
-                            };
-
-                            Attendance.Add(attendance);
-                        }
-                    }
-                }
+                var attendanceRecords = dbContext.AttendanceRecords.ToList();
+                Attendance = new ObservableCollection<Attendance>(attendanceRecords);
             }
         }
+
 
         private void AddEmployee(object parameter)
         {
             Employee newEmployee = new Employee();
             Employees.Add(newEmployee);
+            LoadEmployees();
         }
 
         private void EditEmployee(object parameter)

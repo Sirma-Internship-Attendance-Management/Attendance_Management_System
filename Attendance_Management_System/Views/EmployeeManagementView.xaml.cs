@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using Attendance_Management_System.ViewModels;
 namespace Attendance_Management_System.Views
 {
     /// <summary>
@@ -23,9 +23,9 @@ namespace Attendance_Management_System.Views
         
 
         public EmployeeManagementView()
-        {
+        {            
             InitializeComponent();
-            
+            DataContext = new EmployeeManagementViewModel();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
