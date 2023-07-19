@@ -186,7 +186,7 @@
 />
             </StackPanel>
         </StackPanel>
-    </Grid>
+            </Grid>
     </Border>
     </Border>
 </Window>
