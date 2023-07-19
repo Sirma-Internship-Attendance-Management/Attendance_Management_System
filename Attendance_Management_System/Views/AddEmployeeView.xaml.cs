@@ -15,15 +15,14 @@ using System.Windows.Shapes;
 namespace Attendance_Management_System.Views
 {
     /// <summary>
-    /// Interaction logic for EmployeeManagementView.xaml
+    /// Interaction logic for AddEmployeeView.xaml
     /// </summary>
-    public partial class EmployeeManagementView : Window
+    public partial class AddEmployeeView : Window
     {
-        public EmployeeManagementView()
+        public AddEmployeeView()
         {
             InitializeComponent();
         }
-
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -49,13 +48,7 @@ namespace Attendance_Management_System.Views
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            //Application.Current.Shutdown();
-        }
-        private void AddEmployee_Click(object sender, RoutedEventArgs e)
-        {
-            AddEmployeeView addEmployeeView = new AddEmployeeView();
-            addEmployeeView.ShowDialog();
+            Close();
         }
     }
 }

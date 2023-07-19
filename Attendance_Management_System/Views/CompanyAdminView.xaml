@@ -58,16 +58,10 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
-
     <Border CornerRadius="12">
-        <!--<Border.Background>
-            <ImageBrush ImageSource="" Stretch="None"/>
-        </Border.Background>-->
-
         <Border CornerRadius="10"                    
             BorderThickness="2"
             Opacity="0.95">
-
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#462AD8" Offset="0"/>
@@ -75,7 +69,6 @@
                     <GradientStop Color="#8A16C1" Offset="1"/>
                 </LinearGradientBrush>
             </Border.BorderBrush>
-
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
                     <GradientStop Color="#060531" Offset="0"/>
@@ -83,18 +76,11 @@
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
-                <!--<Grid.DataContext>
-                    <vm:CompanyAdminViewModel />
-                </Grid.DataContext>-->
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
-                    
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-
                 <Grid Grid.Row="0">
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="25"/>
@@ -102,7 +88,6 @@
                         <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="5"/>
                     </Grid.ColumnDefinitions>
-
                     <TextBlock Text="Attendance Management System"
                                Foreground="DarkGray"
                                FontSize="10"
@@ -110,7 +95,6 @@
                                Grid.Column="0"
                                VerticalAlignment="Center"
                                Margin="10,0,0,0"/>
-
                     <Button x:Name="btnMinimize"                           
                             BorderThickness="0"
                             Content="-"
@@ -119,7 +103,7 @@
                             FontFamily="Montserrat"
                             Cursor="Hand"
                             Grid.Column="1"
-                            Click="btnMinimize_Click">                        
+                            Click="btnMinimize_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="18" Height="18"
@@ -130,10 +114,7 @@
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
-
                     </Button>
-
-
                     <Button x:Name="btnMaximize"                           
                             BorderThickness="0"
                             Content="🗖"
@@ -143,7 +124,6 @@
                             Cursor="Hand"
                             Grid.Column="2"
                             Click="btnMaximize_Click">
-
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#228B22"/>
@@ -154,7 +134,6 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="18" Height="18"
@@ -165,13 +144,7 @@
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
-
                     </Button>
-
-
-
-
-
                     <Button x:Name="btnClose"                          
                             BorderThickness="0"
                             Content="X"
@@ -181,7 +154,6 @@
                             Cursor="Hand"
                             Grid.Column="3"
                             Click="btnClose_Click">
-
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#DA34AE"/>
@@ -192,7 +164,6 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="18" Height="18"
@@ -210,109 +181,92 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <!--<Expander>
-                        <Expander.Header>
-                            <DockPanel VerticalAlignment="Stretch">
-                                <Image Source="Images/icon.ico" Height="16" DockPanel.Dock="Left" />
-                                <TextBlock FontStyle="Italic" Foreground="Green">Company Info</TextBlock>
-                            </DockPanel>
-                        </Expander.Header>-->
                     <Border BorderThickness="0, 0, 2, 0" >
                         <Border.BorderBrush>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                
                                 <GradientStop Color="#8A16C1" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.BorderBrush>
                         <StackPanel
                         Grid.Column="0" Name="Menu" Width="60">
-                        <StackPanel.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                <!--<GradientStop Color="#162AD8" Offset="0"/>
+                            <StackPanel.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <!--<GradientStop Color="#162AD8" Offset="0"/>
                                 <GradientStop Color="#8A16C1" Offset="1"/>-->
                                     <GradientStop Color="DarkBlue" Offset="0"/>
                                     <GradientStop Color="MidnightBlue" Offset="0.75"/>
-
-
                                 </LinearGradientBrush>
-                        </StackPanel.Background>
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel Width="60">
+                            </StackPanel.Background>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Width="60">
                                     <Button x:Name="ButtonMenu" Cursor="Hand" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Width="40" Height="40" Click="ButtonMenu_Click">
-                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Rectangle x:Name="rectangle" Width="30" Height="5" Margin="0 0 0 0" Fill="AntiqueWhite" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="-0,0.5">
-                                    <Rectangle.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform/>
-                                            <SkewTransform/>
-                                            <RotateTransform/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </Rectangle.RenderTransform>
-                                </Rectangle>
-                                <Rectangle x:Name="rectangle1" Width="30" Height="5" Margin="0 20 0 0 " Fill="AntiqueWhite" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="-0,0.5">
-                                    <Rectangle.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform/>
-                                            <SkewTransform/>
-                                            <RotateTransform/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </Rectangle.RenderTransform>
-                                </Rectangle>
-                                    <Rectangle x:Name="rectangle2" Width="30" Height="5" Margin="0 10 0 0" Fill="AntiqueWhite" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                            </Grid>
-                        </Button>
-                            </StackPanel>
+                                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Rectangle x:Name="rectangle" Width="30" Height="5" Margin="0 0 0 0" Fill="AntiqueWhite" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="-0,0.5">
+                                                <Rectangle.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </Rectangle.RenderTransform>
+                                            </Rectangle>
+                                            <Rectangle x:Name="rectangle1" Width="30" Height="5" Margin="0 20 0 0 " Fill="AntiqueWhite" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="-0,0.5">
+                                                <Rectangle.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </Rectangle.RenderTransform>
+                                            </Rectangle>
+                                            <Rectangle x:Name="rectangle2" Width="30" Height="5" Margin="0 10 0 0" Fill="AntiqueWhite" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                        </Grid>
+                                    </Button>
+                                </StackPanel>
                                 <StackPanel Width="90" VerticalAlignment="Center">
-                                    
-                                        <TextBlock Margin="0,10,10,0" Text="Menu"                               
+                                    <TextBlock Margin="0,10,10,0" Text="Menu"                               
                                FontSize="20"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                        Name="txtblmenu">
-                                <TextBlock.Foreground>
-                                    <LinearGradientBrush>
+                                        <TextBlock.Foreground>
+                                            <LinearGradientBrush>
                                                 <GradientStop Color="#2af598" Offset="1"/>
                                                 <GradientStop Color="#009efd" Offset="0.3"/>
-                                                
-                                    </LinearGradientBrush>
-                                </TextBlock.Foreground>
-                            </TextBlock>
-                                        
+                                            </LinearGradientBrush>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
                                 </StackPanel>
                             </StackPanel>
                             <Button Name="btnAccount"                                
                                  Cursor="Hand"        
                                  Command="{Binding AccountCommand}"
-                                Background="Transparent" >
-
+                                Background="Transparent">
                                 <StackPanel Orientation="Horizontal"  
                                     Cursor="Hand">
-
-                                    <StackPanel Width="60" >
+                                    <StackPanel Width="60">
                                         <Image Margin="10,10,10,10" Source="Images/icon.ico" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                     <StackPanel Width="100">
-                                    <TextBlock Margin="0,15,20,10" Text="Account"                       
+                                        <TextBlock Margin="0,15,20,10" Text="Account"                       
                                FontSize="20"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
                                HorizontalAlignment="Center"
                                        Name="txtAccount">
-                                        <TextBlock.Foreground>
-                                            <LinearGradientBrush>
-
-                                                <GradientStop Color="White" Offset="0.3"/>
-                                            </LinearGradientBrush>
-                                        </TextBlock.Foreground>
-                                    </TextBlock>
-                                </StackPanel>
+                                            <TextBlock.Foreground>
+                                                <LinearGradientBrush>
+                                                    <GradientStop Color="White" Offset="0.3"/>
+                                                </LinearGradientBrush>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
                             </Button>
-
                             <Button Name="btnSettings"                                
                                  Cursor="Hand"        
                                  Command="{Binding SettingsCommand}"
@@ -325,23 +279,21 @@
                                         <Image Margin="10,10,10,10" Source="Images/settings.png" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                     <StackPanel Width="100">
-                                    <TextBlock Margin="0,15,20,10" Text="Settings"                               
+                                        <TextBlock Margin="0,15,20,10" Text="Settings"                               
                                FontSize="20"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
                                HorizontalAlignment="Center"
                                        Name="txtsettings">
-                                        <TextBlock.Foreground>
-                                            <LinearGradientBrush>
-
-                                                <GradientStop Color="White" Offset="0.3"/>
-                                            </LinearGradientBrush>
-                                        </TextBlock.Foreground>
-                                    </TextBlock>
-                                </StackPanel>
+                                            <TextBlock.Foreground>
+                                                <LinearGradientBrush>
+                                                    <GradientStop Color="White" Offset="0.3"/>
+                                                </LinearGradientBrush>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
                             </Button>
-
                             <Button Name="btnInfo"                                
                                  Cursor="Hand"        
                                  Command="{Binding InfoCommand}"
@@ -354,35 +306,29 @@
                                         <Image Margin="10,10,10,10" Source="Images/infoBtn.png" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                     <StackPanel Width="100">
-                                    <TextBlock Margin="0,15,60,10" Text="Info"                               
+                                        <TextBlock Margin="0,15,60,10" Text="Info"                               
                                FontSize="20"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
                                HorizontalAlignment="Center"
                                        Name="txtinfo">
-                                        <TextBlock.Foreground>
-                                            <LinearGradientBrush>
-
-                                                <GradientStop Color="White" Offset="0.3"/>
-                                            </LinearGradientBrush>
-                                        </TextBlock.Foreground>
-                                    </TextBlock>
-                                </StackPanel>
+                                            <TextBlock.Foreground>
+                                                <LinearGradientBrush>
+                                                    <GradientStop Color="White" Offset="0.3"/>
+                                                </LinearGradientBrush>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
                             </Button>
-
                             <Button Name="btnLogout"                                
                                  Cursor="Hand"        
                                     Click="Logout_Click"                                  
-                                Background="Transparent" >
-                                <!--Command="{Binding LogoutCommand}"-->
-                            
-                            <StackPanel Orientation="Horizontal"  >
-                                <!--Cursor="Hand"        
-                                    MouseLeftButtonUp="Logout_Click">-->
-                                <StackPanel Width="60" >
-                            <Image Margin="10,10,10,10" Source="Images/img_exit.png" HorizontalAlignment="Center"/>
-                                </StackPanel>
+                                Background="Transparent">
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Width="60" >
+                                        <Image Margin="10,10,10,10" Source="Images/img_exit.png" HorizontalAlignment="Center"/>
+                                    </StackPanel>
                                     <StackPanel Width="100">
                                         <TextBlock Margin="0,15,30,10" Text="Logout"                               
                                FontSize="20"
@@ -390,29 +336,15 @@
                                FontFamily="Montserrat"
                                HorizontalAlignment="Center"
                                        Name="txtblogout">
-                                <TextBlock.Foreground>
-                                    <LinearGradientBrush>
-
-                                        <GradientStop Color="White" Offset="0.3"/>
-                                    </LinearGradientBrush>
-                                </TextBlock.Foreground>
-                            </TextBlock>
-                                <!--<StackPanel.Style>
-                                    <Style TargetType="{x:Type StackPanel}">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#28AEED"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>-->
+                                            <TextBlock.Foreground>
+                                                <LinearGradientBrush>
+                                                    <GradientStop Color="White" Offset="0.3"/>
+                                                </LinearGradientBrush>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
                             </Button>
-
-                            
-
-
                         </StackPanel>
                     </Border>
                     <!--</Expander>-->
@@ -421,8 +353,6 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
-
                         <materialDesign:TransitioningContent>
                             <materialDesign:TransitioningContent.OpeningEffects>
                                 <materialDesign:TransitionEffect Kind="SlideInFromTop" Duration="0:0:1.2"/>
@@ -431,29 +361,28 @@
                             <Border CornerRadius="10"  Margin="20, 15, 20, 0" Padding="5"                                 
                                 BorderThickness="2" 
                                 Opacity="0.95">
-                            <Border.BorderBrush>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="#462AD8" Offset="0"/>
-                                    <GradientStop Color="#DA34AE" Offset="0.75"/>
-                                    <GradientStop Color="#8A16C1" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.BorderBrush>
-                            <TextBlock Margin="30,10,30,10" Text="Company Administration Page"
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#462AD8" Offset="0"/>
+                                        <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                        <GradientStop Color="#8A16C1" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                                <TextBlock Margin="30,10,30,10" Text="Company Administration Page"
                                Name="headText"
                                FontSize="25"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
                                HorizontalAlignment="Center">
-                                <TextBlock.Foreground>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="#2af598" Offset="1"/>
-                                        <GradientStop Color="#009efd" Offset="0.3"/>
-                                    </LinearGradientBrush>
-                                </TextBlock.Foreground>
-                            </TextBlock>
-                        </Border>
+                                    <TextBlock.Foreground>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color="#2af598" Offset="1"/>
+                                            <GradientStop Color="#009efd" Offset="0.3"/>
+                                        </LinearGradientBrush>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </Border>
                         </materialDesign:TransitioningContent>
-
                         <materialDesign:TransitioningContent Grid.Row="1" Margin="20, 20, 20, 20">
                             <materialDesign:TransitioningContent.OpeningEffects>
                                 <materialDesign:TransitionEffect Kind="SlideInFromBottom" Duration="0:0:1.2"/>
@@ -462,44 +391,92 @@
                             <Border CornerRadius="10"  Background="DarkSlateBlue"                 
             BorderThickness="2"
             Opacity="0.95">
-                        
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#462AD8" Offset="0"/>
-                                <GradientStop Color="#DA34AE" Offset="0.75"/>
-                                <GradientStop Color="#8A16C1" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
-
-
-                        
-                        <Grid>
-                        
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0">
-                                   
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#462AD8" Offset="0"/>
+                                        <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                        <GradientStop Color="#8A16C1" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
                                         <GroupBox Margin="15, 15, 15, 15" Background="LightSteelBlue">
-                                        <GroupBox.Header>
-                                            <Border Background="AliceBlue" BorderBrush="Silver" BorderThickness="2" CornerRadius="5,5,5,5">
-                                                <Label x:Name="hdlblPersInf" Content="Company Information"></Label>
-                                            </Border>
-                                            
-                                        </GroupBox.Header>
-
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>                                                
-                                            </Grid.RowDefinitions>
-                                            <StackPanel Grid.Row="0">
-                                                <Border CornerRadius="10"               
+                                            <GroupBox.Header>
+                                                <Border Background="AliceBlue" BorderBrush="Silver" BorderThickness="2" CornerRadius="5,5,5,5">
+                                                    <Label x:Name="hdlblPersInf" Content="Company Information"></Label>
+                                                </Border>
+                                            </GroupBox.Header>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <StackPanel Grid.Row="0">
+                                                    <Border CornerRadius="10"               
                                                     BorderThickness="2" 
                                                     Opacity="0.95" 
                                                     Background="LightYellow"
                                                     Width="100" Height="100" Margin="0, 10, 0, 10">
+                                                        <Border.BorderBrush>
+                                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                                <GradientStop Color="#462AD8" Offset="0"/>
+                                                                <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                                                <GradientStop Color="#8A16C1" Offset="1"/>
+                                                            </LinearGradientBrush>
+                                                        </Border.BorderBrush>
+                                                        <Image Source="Images/noLogo.png" Width="100" Height="100">
+                                                        </Image>
+                                                    </Border>
+                                                </StackPanel>
+                                                <Grid Grid.Row="1" Margin="0, 0, 0, 0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Label Grid.Row="0" Grid.Column="0" Content="Company Name:"></Label>
+                                                    <Label Grid.Row="1" Grid.Column="0" Content="Employees:"></Label>
+                                                    <Label Grid.Row="2" Grid.Column="0" Content="CEO:"></Label>
+                                                    <Label Grid.Row="3" Grid.Column="0" Content="Administrator:"></Label>
+                                                    <Label Grid.Row="0" Grid.Column="1" Content="Test Name"></Label>
+                                                    <Label Grid.Row="1" Grid.Column="1" Content="43"></Label>
+                                                    <Label Grid.Row="2" Grid.Column="1" Content="B.B."></Label>
+                                                    <Label Grid.Row="3" Grid.Column="1" Content="Admin123"></Label>
+                                                </Grid>
+                                            </Grid>
+                                        </GroupBox>
+                                    </StackPanel>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Border Grid.Row="0" CornerRadius="10"  Margin="20, 30, 20, 10" Background="Orange"                               
+                                BorderThickness="2" 
+                                Opacity="0.95">
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                    <GradientStop Color="#462AD8" Offset="0"/>
+                                                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                                    <GradientStop Color="#8A16C1" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
+                                            <StackPanel Margin="0, 0, 0, 0" HorizontalAlignment="Center" >
+                                                <Border CornerRadius="10"  Margin="20, 10, 20, 10"  
+                                             Background="OrangeRed"
+                                BorderThickness="2" 
+                                Opacity="0.95">
                                                     <Border.BorderBrush>
                                                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                                             <GradientStop Color="#462AD8" Offset="0"/>
@@ -507,224 +484,138 @@
                                                             <GradientStop Color="#8A16C1" Offset="1"/>
                                                         </LinearGradientBrush>
                                                     </Border.BorderBrush>
-                                                    <Image Source="Images/noLogo.png" Width="100" Height="100">                                                      
-
-                                                    </Image>
-                                                </Border>
-
-                                            </StackPanel>
-                                            <Grid Grid.Row="1" Margin="0, 0, 0, 0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*"/>
-                                                    <RowDefinition Height="*"/>
-                                                    <RowDefinition Height="*"/>
-                                                    <RowDefinition Height="*"/>
-                                                </Grid.RowDefinitions>
-                                                <Label Grid.Row="0" Grid.Column="0" Content="Company Name:"></Label>
-                                                <Label Grid.Row="1" Grid.Column="0" Content="Employees:"></Label>
-                                                <Label Grid.Row="2" Grid.Column="0" Content="CEO:"></Label>
-                                                <Label Grid.Row="3" Grid.Column="0" Content="Administrator:"></Label>
-                                                <Label Grid.Row="0" Grid.Column="1" Content="Test Name"></Label>
-                                                <Label Grid.Row="1" Grid.Column="1" Content="43"></Label>
-                                                <Label Grid.Row="2" Grid.Column="1" Content="B.B."></Label>
-                                                <Label Grid.Row="3" Grid.Column="1" Content="Admin123"></Label>
-                                            </Grid>
-                                        </Grid>
-                                    </GroupBox>
-                                    
-                                </StackPanel>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>                                        
-                                    </Grid.RowDefinitions>
-                                    
-                                    
-                                    
-                                        <Border Grid.Row="0" CornerRadius="10"  Margin="20, 30, 20, 10" Background="Orange"                               
-                                BorderThickness="2" 
-                                Opacity="0.95">
-                                    <Border.BorderBrush>
-                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                            <GradientStop Color="#462AD8" Offset="0"/>
-                                            <GradientStop Color="#DA34AE" Offset="0.75"/>
-                                            <GradientStop Color="#8A16C1" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Border.BorderBrush>
-                                    <StackPanel Margin="0, 0, 0, 0" HorizontalAlignment="Center" >
-                                            <Border CornerRadius="10"  Margin="20, 10, 20, 10"  
-                                             Background="OrangeRed"
-                                BorderThickness="2" 
-                                Opacity="0.95">
-                                                <Border.BorderBrush>
-                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                                        <GradientStop Color="#462AD8" Offset="0"/>
-                                                        <GradientStop Color="#DA34AE" Offset="0.75"/>
-                                                        <GradientStop Color="#8A16C1" Offset="1"/>
-                                                    </LinearGradientBrush>
-                                                </Border.BorderBrush>
-                                                <TextBlock Margin="30,10,30,10" Text="Managment"
+                                                    <TextBlock Margin="30,10,30,10" Text="Managment"
                                Name="manText"
                                FontSize="25"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
                                HorizontalAlignment="Center">
-                                        <TextBlock.Foreground>
-                                            <LinearGradientBrush>
-                                                <GradientStop Color="#2af598" Offset="1"/>
-                                                <GradientStop Color="#009efd" Offset="0.3"/>
-                                            </LinearGradientBrush>
-                                        </TextBlock.Foreground>
-                                    </TextBlock>
-                                    </Border>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="btnOpen" 
+                                                        <TextBlock.Foreground>
+                                                            <LinearGradientBrush>
+                                                                <GradientStop Color="#2af598" Offset="1"/>
+                                                                <GradientStop Color="#009efd" Offset="0.3"/>
+                                                            </LinearGradientBrush>
+                                                        </TextBlock.Foreground>
+                                                    </TextBlock>
+                                                </Border>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                    <Button x:Name="btnOpen" 
                             Grid.Column="1"
                             Command="{Binding OpenCommand}"
-                            BorderThickness="0"
-                            
+                            BorderThickness="0"                            
                             Foreground="White"
                             FontSize="12"
                             FontFamily="Montserrat"
                             Cursor="Hand" Margin="0,0,0,0" Grid.Row="1">
-                            
-
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Background" Value="AntiqueWhite"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#28AEED"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-
-                            <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Width="100" Height="100"
+                                                        <Button.Style>
+                                                            <Style TargetType="{x:Type Button}">
+                                                                <Setter Property="Background" Value="AntiqueWhite"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="#28AEED"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border Width="100" Height="100"
                                         CornerRadius="20"
                                         BorderThickness="2"
                                         Margin="20, 0, 0, 20"
                                         Background="{TemplateBinding Background}">
-                                <ContentPresenter VerticalAlignment="Center"
+                                                                    <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
-                                        <Border.BorderBrush>
-                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                                <GradientStop Color="#462AD8" Offset="0"/>
-                                                <GradientStop Color="#DA34AE" Offset="0.75"/>
-                                                <GradientStop Color="#8A16C1" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </Border.BorderBrush>
-                                    </Border>
-                        </ControlTemplate>
-                    </Button.Template>                            
-                            <Image Source="Images/Employees.png" Width="100" Height="100" />
-                </Button>
-
-
-                        <Button x:Name="btnReports" 
+                                                                    <Border.BorderBrush>
+                                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                                            <GradientStop Color="#462AD8" Offset="0"/>
+                                                                            <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                                                            <GradientStop Color="#8A16C1" Offset="1"/>
+                                                                        </LinearGradientBrush>
+                                                                    </Border.BorderBrush>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                        <Image Source="Images/Employees.png" Width="100" Height="100" />
+                                                    </Button>
+                                                    <Button x:Name="btnReports" 
                             Grid.Column="0"
                             Command="{Binding OpenCommand2}"
-                            BorderThickness="0"
-                            
+                            BorderThickness="0"                            
                             Foreground="White"
                             FontSize="12"
                             FontFamily="Montserrat"
                             Cursor="Hand" Margin="0,0,0,0"                             
                             Grid.Row="1">
-
-
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Background" Value="AntiqueWhite"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#28AEED"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Width="100" Height="100"
+                                                        <Button.Style>
+                                                            <Style TargetType="{x:Type Button}">
+                                                                <Setter Property="Background" Value="AntiqueWhite"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="#28AEED"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border Width="100" Height="100"
                                         CornerRadius="20"
                                         BorderThickness="2"
                                         Margin="20, 0, 20, 20"
                                         Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center"
+                                                                    <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
-                                        <Border.BorderBrush>
-                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                                <GradientStop Color="#462AD8" Offset="0"/>
-                                                <GradientStop Color="#DA34AE" Offset="0.75"/>
-                                                <GradientStop Color="#8A16C1" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </Border.BorderBrush>
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                            <Image Source="Images/Reports.png" Width="100" Height="100" />
-                        </Button>
-                                </StackPanel>
-                                </StackPanel>
-                                    </Border>
-                                    
-
-
-                                    
+                                                                    <Border.BorderBrush>
+                                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                                            <GradientStop Color="#462AD8" Offset="0"/>
+                                                                            <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                                                            <GradientStop Color="#8A16C1" Offset="1"/>
+                                                                        </LinearGradientBrush>
+                                                                    </Border.BorderBrush>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                        <Image Source="Images/Reports.png" Width="100" Height="100" />
+                                                    </Button>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
                                         <Border CornerRadius="10" Margin="20, 0, 20, 20" Grid.Row="1" Background="LightGreen"
                                             BorderThickness="2" 
                                 Opacity="0.95">
-                                        <Border.BorderBrush>
-                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                                <GradientStop Color="#462AD8" Offset="0"/>
-                                                <GradientStop Color="#DA34AE" Offset="0.75"/>
-                                                <GradientStop Color="#8A16C1" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </Border.BorderBrush>
-                                        <StackPanel Orientation="Horizontal"
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                    <GradientStop Color="#462AD8" Offset="0"/>
+                                                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                                    <GradientStop Color="#8A16C1" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
+                                            <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
-                                                    >
-                                            <Label FontSize="15"
+                                                    VerticalAlignment="Center">
+                                                <Label FontSize="15"
                                                    FontWeight="Medium"
                                                    FontFamily="Montserrat"
                                                    Content="Current time is:"></Label>
-                                        <Label Name="timeLabel" 
+                                                <Label Name="timeLabel" 
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
                                                FontSize="15"
                                                FontWeight="Medium"
                                                FontFamily="Montserrat"
                                                Content="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='Today is: {0:dd:MM:yy}'}" />
-                                        </StackPanel>
-                                    </Border>
-                                    
-                            </Grid>
-                            </Grid>
-                        
-                    </Border>
-                    </materialDesign:TransitioningContent>
-                </Grid>
-                    <Grid Grid.Column="0" Grid.Row="1">
-                       
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </materialDesign:TransitioningContent>
                     </Grid>
-                    
+                    <Grid Grid.Column="0" Grid.Row="1">
+                    </Grid>
                 </Grid>
-                
-
-
             </Grid>
         </Border>
-
     </Border>
-
 </Window>

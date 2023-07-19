@@ -12,10 +12,6 @@ namespace Attendance_Management_System.ViewModels
         public AttendanceViewModel()
         {
             Attendances = new ObservableCollection<Attendance>();
-            // Populate the Attendances collection with data
-            // You can fetch the data from a database or any other source
-
-            // Example data
             Attendances.Add(new Attendance { AttendanceId = 1, EmployeeId = 1, EventId = 1, CheckInTime = DateTime.Now, CheckOutTime = DateTime.Now.AddHours(2) });
             Attendances.Add(new Attendance { AttendanceId = 2, EmployeeId = 2, EventId = 1, CheckInTime = DateTime.Now, CheckOutTime = DateTime.Now.AddHours(3) });
             Attendances.Add(new Attendance { AttendanceId = 3, EmployeeId = 1, EventId = 2, CheckInTime = DateTime.Now, CheckOutTime = DateTime.Now.AddHours(1) });

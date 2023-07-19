@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using Attendance_Management_System.Views;
 
 namespace Attendance_Management_System.ViewModels
 {
@@ -19,7 +20,6 @@ namespace Attendance_Management_System.ViewModels
         private ObservableCollection<Attendance> _attendance;
         private string _connectionString = "dbConnect";
 
-        
         public DatePicker StartDatePicker { get; set; }
         public DatePicker EndDatePicker { get; set; }
         public ListBox EmployeeListBox { get; set; }
@@ -50,6 +50,7 @@ namespace Attendance_Management_System.ViewModels
         public RelayCommand CheckInCommand { get; }
         public RelayCommand CheckOutCommand { get; }
         public RelayCommand GenerateAttendanceReportCommand { get; }
+        public RelayCommand SaveEmployeeCommand { get; }
 
         public EmployeeManagementViewModel()
         {
@@ -59,6 +60,7 @@ namespace Attendance_Management_System.ViewModels
             CheckInCommand = new RelayCommand(CheckIn, CanCheckIn);
             CheckOutCommand = new RelayCommand(CheckOut, CanCheckOut);
             GenerateAttendanceReportCommand = new RelayCommand(GenerateAttendanceReport, CanGenerateAttendanceReport);
+            SaveEmployeeCommand = new RelayCommand(SaveEmployee);
 
             Employees = new ObservableCollection<Employee>();
             Attendance = new ObservableCollection<Attendance>();
@@ -233,10 +235,10 @@ namespace Attendance_Management_System.ViewModels
         private void GenerateAttendanceReport(object parameter)
         {
             DateTime startDate = GetSelectedStartDate();
-            DateTime endDate = GetSelectedEndDate(); 
-            Employee selectedEmployee = GetSelectedEmployee(); 
+            DateTime endDate = GetSelectedEndDate();
+            Employee selectedEmployee = GetSelectedEmployee();
 
-           
+
             var filteredAttendance = Attendance.Where(a =>
                 (startDate == default || a.CheckInTime.Date >= startDate) &&
                 (endDate == default || a.CheckInTime.Date <= endDate) &&
@@ -285,5 +287,17 @@ namespace Attendance_Management_System.ViewModels
         {
             return EmployeeListBox.SelectedItem as Employee;
         }
+
+        private void SaveEmployee(object parameter)
+        {
+            Employee employee = parameter as Employee;
+            if (employee != null)
+            {
+                Employees.Add(employee);
+
+                // Close the AddEmployeeView or perform any other necessary actions
+            }
+        }
+
     }
 }
