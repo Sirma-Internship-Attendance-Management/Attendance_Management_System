@@ -58,5 +58,15 @@ namespace Attendance_Management_System.Views
             AddEmployeeView addEmployeeView = new AddEmployeeView();
             addEmployeeView.ShowDialog();
         }
+        private void DeleteEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            // Invoke the DeleteEmployeeCommand in the ViewModel
+            if (DataContext is EmployeeManagementViewModel viewModel)
+            {
+                viewModel.DeleteEmployeeCommand.Execute(null);
+            }
+        }
+
+
     }
 }

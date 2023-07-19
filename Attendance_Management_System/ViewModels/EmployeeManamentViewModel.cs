@@ -112,10 +112,23 @@ namespace Attendance_Management_System.ViewModels
                 MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete the employee {selectedEmployee.Name}?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
+                    using (var dbContext = new MyDbContext())
+                    {
+                        var employeeToDelete = dbContext.Employees.Find(selectedEmployee.EmployeeId);
+                        if (employeeToDelete != null)
+                        {
+                            dbContext.Employees.Remove(employeeToDelete);
+                            dbContext.SaveChanges();
+                        }
+                    }
+
                     Employees.Remove(selectedEmployee);
+                    LoadEmployees();
                 }
             }
         }
+
+
 
         private bool CanEditOrDeleteEmployee(object parameter)
         {
