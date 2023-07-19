@@ -63,7 +63,7 @@
                         </TextBlock>
 
                         <Button x:Name="btnOK"
-        Command="{Binding LoginCommand}"
+        
         Margin="0,10,0,0"                           
         BorderThickness="0"
         Content="OK"

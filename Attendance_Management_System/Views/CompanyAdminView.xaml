@@ -286,7 +286,7 @@
                             </StackPanel>
                             <Button Name="btnAccount"                                
                                  Cursor="Hand"        
-                                 Click="btnAccount_Click"
+                                 Command="{Binding AccountCommand}"
                                 Background="Transparent" >
 
                                 <StackPanel Orientation="Horizontal"  
@@ -315,7 +315,7 @@
 
                             <Button Name="btnSettings"                                
                                  Cursor="Hand"        
-                                 Click="btnSettings_Click"
+                                 Command="{Binding SettingsCommand}"
                                 Background="Transparent" >
 
                                 <StackPanel Orientation="Horizontal"  
@@ -344,7 +344,7 @@
 
                             <Button Name="btnInfo"                                
                                  Cursor="Hand"        
-                                 Click="btnInfo_Click"
+                                 Command="{Binding InfoCommand}"
                                 Background="Transparent" >
 
                                 <StackPanel Orientation="Horizontal"  
@@ -424,8 +424,8 @@
 
                         <materialDesign:TransitioningContent>
                             <materialDesign:TransitioningContent.OpeningEffects>
-                                <materialDesign:TransitionEffect Kind="SlideInFromTop" Duration="0:0:0.8"/>
-                                <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8"/>
+                                <materialDesign:TransitionEffect Kind="SlideInFromTop" Duration="0:0:1.2"/>
+                                <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:1.2"/>
                             </materialDesign:TransitioningContent.OpeningEffects>
                             <Border CornerRadius="10"  Margin="20, 15, 20, 0" Padding="5"                                 
                                 BorderThickness="2" 
@@ -453,8 +453,12 @@
                         </Border>
                         </materialDesign:TransitioningContent>
 
-
-                        <Border CornerRadius="10" Grid.Row="1" Margin="20, 20, 20, 20" Background="DarkSlateBlue"                 
+                        <materialDesign:TransitioningContent Grid.Row="1" Margin="20, 20, 20, 20">
+                            <materialDesign:TransitioningContent.OpeningEffects>
+                                <materialDesign:TransitionEffect Kind="SlideInFromBottom" Duration="0:0:1.2"/>
+                                <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:1.2"/>
+                            </materialDesign:TransitioningContent.OpeningEffects>
+                            <Border CornerRadius="10"  Background="DarkSlateBlue"                 
             BorderThickness="2"
             Opacity="0.95">
                         
@@ -475,11 +479,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0">
-                                    <materialDesign:TransitioningContent>
-                                        <materialDesign:TransitioningContent.OpeningEffects>
-                                            <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:0.8"/>
-                                            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8"/>
-                                        </materialDesign:TransitioningContent.OpeningEffects>
+                                   
                                         <GroupBox Margin="15, 15, 15, 15" Background="LightSteelBlue">
                                         <GroupBox.Header>
                                             <Border Background="AliceBlue" BorderBrush="Silver" BorderThickness="2" CornerRadius="5,5,5,5">
@@ -536,7 +536,7 @@
                                             </Grid>
                                         </Grid>
                                     </GroupBox>
-                                    </materialDesign:TransitioningContent>
+                                    
                                 </StackPanel>
                                 <Grid Grid.Column="1">
                                     <Grid.RowDefinitions>
@@ -545,11 +545,7 @@
                                     </Grid.RowDefinitions>
                                     
                                     
-                                    <materialDesign:TransitioningContent>
-                                        <materialDesign:TransitioningContent.OpeningEffects>
-                                            <materialDesign:TransitionEffect Kind="SlideInFromRight" Duration="0:0:0.8"/>
-                                            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8"/>
-                                        </materialDesign:TransitioningContent.OpeningEffects>
+                                    
                                         <Border Grid.Row="0" CornerRadius="10"  Margin="20, 30, 20, 10" Background="Orange"                               
                                 BorderThickness="2" 
                                 Opacity="0.95">
@@ -679,7 +675,7 @@
                                 </StackPanel>
                                 </StackPanel>
                                     </Border>
-                                    </materialDesign:TransitioningContent>
+                                    
 
 
                                     
@@ -715,7 +711,7 @@
                             </Grid>
                         
                     </Border>
-                    
+                    </materialDesign:TransitioningContent>
                 </Grid>
                     <Grid Grid.Column="0" Grid.Row="1">
                        

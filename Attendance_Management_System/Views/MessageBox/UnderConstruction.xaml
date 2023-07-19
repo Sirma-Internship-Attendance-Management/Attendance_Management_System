@@ -1,4 +1,4 @@
-﻿<Window x:Class="Attendance_Management_System.Views.MessageBox.LogInFail"
+﻿<Window x:Class="Attendance_Management_System.Views.MessageBox.UnderConstruction"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Attendance_Management_System.Views.MessageBox"
         mc:Ignorable="d"
         Title="Log In Success" 
-        Height="350" 
+        Height="300" 
         Width="250"
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" 
@@ -56,7 +56,7 @@
                                     <GradientStop Color="#8A16C1" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.BorderBrush>
-                            <Image Margin="0,0,0,0" gif:AnimationBehavior.SourceUri="Images/error.gif" Width="200" Height="150">
+                            <Image Margin="0,0,0,0" gif:AnimationBehavior.SourceUri="Images/underConstruction.gif" Width="200" Height="150">
                                 <Image.RenderTransform>
                                     <ScaleTransform ScaleX="1" ScaleY="1" CenterX="0.5" CenterY="0.5" />
                                 </Image.RenderTransform>
@@ -64,7 +64,7 @@
                             </Image>
                         </Border>
 
-                        <TextBlock Margin="10,10,10,10" Text="Log In Failed"
+                        <TextBlock Margin="10,10,10,10" Text=":("
                                FontSize="22"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
@@ -76,32 +76,9 @@
                                     <GradientStop Color="#009efd" Offset="0.3"/>
                                 </LinearGradientBrush>
                             </TextBlock.Foreground>
-                        </TextBlock>
-                        <TextBlock FontWeight="Medium"
-                               FontFamily="Montserrat"
-                                   Text="Invalid username or password."
-                                   VerticalAlignment="Center"
-                               HorizontalAlignment="Center">
-                            <TextBlock.Foreground>
-                                <LinearGradientBrush>
-                                    <GradientStop Color="#2af598" Offset="1"/>
-                                    <GradientStop Color="#009efd" Offset="0.3"/>
-                                </LinearGradientBrush>
-                            </TextBlock.Foreground>
-                        </TextBlock>
-                        <TextBlock Text="Please try again."
-                                   VerticalAlignment="Center"
-                               HorizontalAlignment="Center">
-                            <TextBlock.Foreground>
-                                <LinearGradientBrush>
-                                    <GradientStop Color="#2af598" Offset="1"/>
-                                    <GradientStop Color="#009efd" Offset="0.3"/>
-                                </LinearGradientBrush>
-                            </TextBlock.Foreground>
-                        </TextBlock>
+                        </TextBlock>                        
 
-                        <Button x:Name="btnOK"
-        
+                        <Button x:Name="btnOK"        
         Margin="0,10,0,0"                           
         BorderThickness="0"
         Content="OK"

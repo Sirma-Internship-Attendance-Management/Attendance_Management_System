@@ -17,6 +17,8 @@ namespace Attendance_Management_System.ViewModels
 
         private string _username;
         private SecureString _securePassword;
+        public ICommand LoginCommand { get; }
+        public ICommand ResetPasswordCommand { get; }
 
         public string Username
         {
@@ -38,11 +40,12 @@ namespace Attendance_Management_System.ViewModels
             }
         }
 
-        public ICommand LoginCommand { get; }
+        
 
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand(Login, CanLogin);
+            ResetPasswordCommand = new RelayCommand(ResetPasswordView);
         }
 
         private void Login(object parameter)
@@ -123,6 +126,12 @@ namespace Attendance_Management_System.ViewModels
             {
                 Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
             }
+        }
+
+        private void ResetPasswordView(object parameter)
+        {
+            UnderConstruction uc = new UnderConstruction();
+            uc.ShowDialog();
         }
     }
 }

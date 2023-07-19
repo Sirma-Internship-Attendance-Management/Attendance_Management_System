@@ -298,20 +298,25 @@
                                FontWeight="Medium"
                                FontFamily="Montserrat"/>
 
-                                <TextBlock Text="Reset"
+
+                               
+                                    <TextBlock Text="Reset"
                                Foreground="Blue"
                                FontSize="12"
                                FontWeight="Medium"
-                               FontFamily="Montserrat"
-                               Cursor="Hand"                               
-                               Margin="8,0,0,0">
+                               FontFamily="Montserrat"                                                              
+                               Margin="3,0,0,0"                               
+                               Cursor="Hand">
+                                    <TextBlock.InputBindings>
+                                        <MouseBinding Command="{Binding ResetPasswordCommand}" MouseAction="LeftClick" />
+                                    </TextBlock.InputBindings>
                     <!--<i:Interaction.Triggers>
         <i:EventTrigger EventName="MouseLeftButtonDown">
             <i:InvokeCommandAction Command="{StaticResource OpenNewWindowCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>-->
                                 </TextBlock>
-
+                                
                                 <!--<Button Width="110" 
                                                 Height="30"  
                                                 Content="Forgot password"

@@ -22,6 +22,7 @@
     <None Remove="Views\Images\user-icon.png" />
     <None Remove="Views\MessageBox\Images\error.gif" />
     <None Remove="Views\MessageBox\Images\success.gif" />
+    <None Remove="Views\MessageBox\Images\underConstruction.gif" />
   </ItemGroup>
 
   <ItemGroup>
@@ -71,6 +72,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Views\MessageBox\Images\success.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\MessageBox\Images\underConstruction.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

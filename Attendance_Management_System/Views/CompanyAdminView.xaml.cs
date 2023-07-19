@@ -71,7 +71,7 @@ namespace Attendance_Management_System.Views
             this.Close();
         }
 
-        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        /*private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
         }
         private void btnAccount_Click(object sender, RoutedEventArgs e)
@@ -82,7 +82,7 @@ namespace Attendance_Management_System.Views
         private void btnInfo_Click(object sender, RoutedEventArgs e)
         {
 
-        }
+        }*/
 
         bool StateClosed = true;
         private void ButtonMenu_Click(object sender, RoutedEventArgs e)

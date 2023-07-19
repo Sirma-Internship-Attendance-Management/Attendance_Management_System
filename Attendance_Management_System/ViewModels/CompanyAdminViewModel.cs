@@ -1,5 +1,6 @@
 ﻿using Attendance_Management_System.Commands;
 using Attendance_Management_System.Views;
+using Attendance_Management_System.Views.MessageBox;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -11,10 +12,21 @@ namespace Attendance_Management_System.ViewModels
         public ICommand OpenCommand { get; }
         public ICommand OpenCommand2 { get; }
 
+        public ICommand AccountCommand { get; }
+
+        public ICommand SettingsCommand { get; }
+
+        public ICommand InfoCommand { get; }
+
+        //public string uc = "Under Construction!";
+
         public CompanyAdminViewModel()
         {
             OpenCommand = new RelayCommand(OpenEmployeeManagementView);
             OpenCommand2 = new RelayCommand(OpenAttendanceView);
+            AccountCommand = new RelayCommand(OpenAccountManagmentView);
+            SettingsCommand = new RelayCommand(OpenSettingsView);
+            InfoCommand = new RelayCommand(OpenInfoView);
         }
 
         private void OpenEmployeeManagementView(object parameter)
@@ -27,6 +39,25 @@ namespace Attendance_Management_System.ViewModels
         {
             AttendanceView attendanceView = new AttendanceView();
             attendanceView.Show();
+        }
+
+        private void OpenAccountManagmentView(object parameter)
+        {
+            //MessageBox.Show(uc);
+            UnderConstruction uc = new UnderConstruction();
+            uc.ShowDialog();
+        }
+
+        private void OpenSettingsView(object parameter)
+        {
+            UnderConstruction uc = new UnderConstruction();
+            uc.ShowDialog();
+        }
+
+        private void OpenInfoView(object parameter)
+        {
+            UnderConstruction uc = new UnderConstruction();
+            uc.ShowDialog();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
