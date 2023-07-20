@@ -1,9 +1,10 @@
 ﻿using Attendance_Management_System.Commands;
+using Attendance_Management_System.DataAccess;
 using Attendance_Management_System.Models;
-using Attendance_Management_System.Views;
 using Attendance_Management_System.Views.MessageBox;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Windows;
@@ -17,6 +18,7 @@ namespace Attendance_Management_System.ViewModels
 
         private string _username;
         private SecureString _securePassword;
+
         public ICommand LoginCommand { get; }
         public ICommand ResetPasswordCommand { get; }
 
@@ -40,8 +42,6 @@ namespace Attendance_Management_System.ViewModels
             }
         }
 
-        
-
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand(Login, CanLogin);
@@ -53,26 +53,20 @@ namespace Attendance_Management_System.ViewModels
             string username = Username;
             string password = ConvertSecureStringToString(SecurePassword);
 
-            bool isAuthenticated = AuthenticateAdmin(username, password);
+            bool isAuthenticated = AuthenticateUser(username, password);
 
             if (isAuthenticated)
             {
                 LogInSuccess lgs = new LogInSuccess();
                 lgs.ShowDialog();
-                
 
-                /*MessageBox.Show("Login successful!");
-
-                CompanyAdminView companyAdminView = new CompanyAdminView();
-                companyAdminView.Show();
-
-                Application.Current.MainWindow?.Close();*/
+                // Close the login window and open the main application window
+                Application.Current.MainWindow?.Close();
             }
             else
             {
                 LogInFail lgf = new LogInFail();
                 lgf.ShowDialog();
-                //MessageBox.Show("Invalid username or password. Please try again.");
             }
         }
 
@@ -81,36 +75,32 @@ namespace Attendance_Management_System.ViewModels
             return !string.IsNullOrEmpty(Username) && SecurePassword != null && SecurePassword.Length > 0;
         }
 
-        private bool AuthenticateAdmin(string username, string password)
+        private bool AuthenticateUser(string username, string password)
         {
+            User storedUser = GetUserByCredentials(username, password);
 
-            Company storedCompany = GetCompanyByAdminCredentials(username, password);
-
-            if (storedCompany != null)
+            if (storedUser != null)
             {
-                return password == storedCompany.AdminPassword;
+                // Replace the placeholder VerifyPassword method with your actual password hashing and salting implementation
+                return VerifyPassword(password, storedUser.Password);
             }
 
             return false;
         }
 
-        // Simulated function to retrieve company by admin credentials
-        private Company GetCompanyByAdminCredentials(string username, string password)
+        private User GetUserByCredentials(string username, string password)
         {
-            // In a real-world scenario, you would retrieve the company from the database based on the admin credentials
-            // Here, we'll simulate it by hardcoding a company
-            if (username == "admin" && password == "password")
+            using (var dbContext = new MyDbContext())
             {
-                return new Company
-                {
-                    CompanyId = 1,
-                    CompanyName = "My Company",
-                    AdminUsername = "admin",
-                    AdminPassword = "password"
-                };
+                // Find the user with the provided username in the database
+                User user = dbContext.Users.FirstOrDefault(u => u.Username == username);
+                return user;
             }
+        }
 
-            return null;
+        private bool VerifyPassword(string providedPassword, string hashedPassword)
+        {
+            return providedPassword == hashedPassword;
         }
 
         private string ConvertSecureStringToString(SecureString secureString)

@@ -10,6 +10,7 @@ namespace Attendance_Management_System.DataAccess
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Attendance> AttendanceRecords { get; set; }
+        public DbSet<User> Users { get; set; } // Add DbSet for the Users table
 
         public MyDbContext() : base(Properties.Settings.Default.DbConnect)
         {
