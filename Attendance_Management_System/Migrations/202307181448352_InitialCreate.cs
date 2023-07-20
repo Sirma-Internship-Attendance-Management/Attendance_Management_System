@@ -27,6 +27,11 @@
                         CompanyName = c.String(),
                         AdminUsername = c.String(),
                         AdminPassword = c.String(),
+                        /*  //new Information added
+                        Email = c.String(),
+                        PhoneNumber = c.String(),
+                        Address = c.String(),
+                        Logo = c.Byte(nullable: true),*/
                     })
                 .PrimaryKey(t => t.CompanyId);
             

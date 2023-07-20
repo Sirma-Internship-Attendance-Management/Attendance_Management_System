@@ -12,7 +12,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         WindowStyle="None"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         AllowsTransparency="True"
@@ -104,6 +104,16 @@
                             Cursor="Hand"
                             Grid.Column="1"
                             Click="btnMinimize_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#28AEED"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#278BEF"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="18" Height="18"
@@ -404,23 +414,53 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Column="0">
-                                        <GroupBox Margin="15, 15, 15, 15" Background="LightSteelBlue">
-                                            <GroupBox.Header>
-                                                <Border Background="AliceBlue" BorderBrush="Silver" BorderThickness="2" CornerRadius="5,5,5,5">
-                                                    <Label x:Name="hdlblPersInf" Content="Company Information"></Label>
-                                                </Border>
-                                            </GroupBox.Header>
+                                        <Border CornerRadius="10"  Margin="10, 10, 5, 10" Background="LightBlue"                               
+                                BorderThickness="2" 
+                                Opacity="0.95" >
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                    <GradientStop Color="#462AD8" Offset="0"/>
+                                                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                                    <GradientStop Color="#8A16C1" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto"/>
                                                     <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
-                                                <StackPanel Grid.Row="0">
+                                                
+
+                                                    <TextBlock Grid.Row="0" Margin="10,10,10,10" Text="Company Information"
+                               
+                               FontSize="20"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               HorizontalAlignment="Center">
+                                                            <TextBlock.Foreground>
+                                                                <LinearGradientBrush>
+                                                                <GradientStop Color="#462AD8" Offset="0"/>
+                                                                <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                                                <GradientStop Color="#8A16C1" Offset="1"/>
+                                                            </LinearGradientBrush>
+                                                            </TextBlock.Foreground>
+                                                        </TextBlock>
+                                                <Grid Grid.Row="1" Margin="0, 0, 0, 0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="2*"/>                                                        
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="*"/>                                                        
+                                                    </Grid.RowDefinitions>
+                                                    <StackPanel Grid.Row="0" Grid.Column="0">
                                                     <Border CornerRadius="10"               
                                                     BorderThickness="2" 
                                                     Opacity="0.95" 
                                                     Background="LightYellow"
-                                                    Width="100" Height="100" Margin="0, 10, 0, 10">
+                                                    Width="100" Height="100" Margin="0, 5, 0, 5">
                                                         <Border.BorderBrush>
                                                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                                                 <GradientStop Color="#462AD8" Offset="0"/>
@@ -431,38 +471,226 @@
                                                         <Image Source="Images/noLogo.png" Width="100" Height="100">
                                                         </Image>
                                                     </Border>
-                                                </StackPanel>
-                                                <Grid Grid.Row="1" Margin="0, 0, 0, 0">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="*"/>
-                                                        <RowDefinition Height="*"/>
-                                                        <RowDefinition Height="*"/>
-                                                        <RowDefinition Height="*"/>
-                                                    </Grid.RowDefinitions>
-                                                    <Label Grid.Row="0" Grid.Column="0" Content="Company Name:"></Label>
+                                                        <Button x:Name="btnlogoChange" Content="Change Logo" Visibility="Collapsed" Margin="10 0 10 10"
+                                                                Foreground="White"
+                                                                FontSize="11"
+                                                                FontFamily="Montserrat"
+                                                                Cursor="Hand"
+                                                                Click="btnChangeLogo_Click">
+                                                            <Button.Style>
+                                                                <Style TargetType="{x:Type Button}">
+                                                                    <Setter Property="Background" Value="#462AD8"/>
+                                                                    <Style.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter Property="Background" Value="#28AEED"/>
+                                                                        </Trigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Button.Style>
+
+                                                            <Button.Template>
+                                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                                    <Border Width="100" Height="20"
+                                                                            CornerRadius="5"
+                                                                            Background="{TemplateBinding Background}">
+                                                                        <ContentPresenter VerticalAlignment="Center"
+                                                                                          HorizontalAlignment="Center"/>
+                                                                    </Border>
+                                                                </ControlTemplate>
+                                                            </Button.Template>
+                                                        </Button>
+                                                    </StackPanel>
+                                                    <Grid Grid.Row="0" Grid.Column="1">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="*"/>
+                                                        </Grid.RowDefinitions>
+
+                                                        <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Content="Company Name:"></Label>
+                                                        <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" 
+                                                               x:Name="lblCompanyName"
+                                                               Content="{Binding CompanyName}"></Label>
+                                                        <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="150" Visibility="Collapsed"
+                                                                 x:Name="tbCompanyName"> </TextBox>
+                                                        <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Content="Industry Type:"></Label>
+                                                        <Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" 
+                                                               x:Name="lblIndustryType"
+                                                               Content="{Binding IndustryType}"></Label>
+                                                        <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="auto" Visibility="Collapsed"
+                                                                 x:Name="tbIndustryType"></TextBox>
+                                                        <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Content="Website:"></Label>
+                                                        <Label Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" 
+                                                               x:Name="lblWebsite"
+                                                               Content="{Binding CompanyWebsite}"></Label>
+                                                        <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Width="auto" Visibility="Collapsed"
+                                                                 x:Name="tbWebsite"></TextBox>
+                                                    </Grid>
+                                                    <StackPanel Grid.Row="1" Grid.Column="0">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Label VerticalAlignment="Center" Content="Employees:"></Label>
+                                                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" Content=""></Label>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                    <Grid Grid.Row="1" Grid.Column="1">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="*"/>                                                                                                                      
+                                                        </Grid.RowDefinitions>
+                                                        <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Content="Address:"></Label>
+                                                        <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" 
+                                                               x:Name="lblAddress"
+                                                               Content="{Binding CompanyAddress}"></Label>
+                                                        <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="193" Visibility="Collapsed"
+                                                                 x:Name="tbAddress"></TextBox>                                                        
+                                                        
+                                                        
+                                                    </Grid>
+                                                    
+                                                
+                                                    <!--<Label Grid.Row="0" Grid.Column="1" Content="Company Name:"></Label>
                                                     <Label Grid.Row="1" Grid.Column="0" Content="Employees:"></Label>
-                                                    <Label Grid.Row="2" Grid.Column="0" Content="CEO:"></Label>
+                                                    <Label Grid.Row="2" Grid.Column="0" Content="Address:"></Label>
                                                     <Label Grid.Row="3" Grid.Column="0" Content="Administrator:"></Label>
                                                     <Label Grid.Row="0" Grid.Column="1" Content="Test Name"></Label>
                                                     <Label Grid.Row="1" Grid.Column="1" Content="43"></Label>
-                                                    <Label Grid.Row="2" Grid.Column="1" Content="B.B."></Label>
+                                                    <Label Grid.Row="2" Grid.Column="1" Content="B.B.24"></Label>
                                                     <Label Grid.Row="3" Grid.Column="1" Content="Admin123"></Label>
+                                                    <Label Grid.Row="0" Grid.Column="2" Content="E-mail"></Label>
+                                                    <Label Grid.Row="1" Grid.Column="2" Content="PhoneNumber"></Label>
+                                                    <Label Grid.Row="2" Grid.Column="2" Content="CEO"></Label>
+                                                    <Label Grid.Row="3" Grid.Column="2" Content="Website:"></Label>
+                                                    <Label Grid.Row="0" Grid.Column="3" Content="asdfg@zxc.bn"></Label>
+                                                    <Label Grid.Row="1" Grid.Column="3" Content="123456"></Label>
+                                                    <Label Grid.Row="2" Grid.Column="3" Content="A.M."></Label>
+                                                    <Label Grid.Row="3" Grid.Column="3" Content="testcompany.com"></Label>-->
                                                 </Grid>
                                             </Grid>
-                                        </GroupBox>
+                                        </Border>
+
+                                        <Button x:Name="btnRedact"
+                                        Command="{Binding RedactCommand}"
+                                        Margin="0,0,0,0"                           
+                                        BorderThickness="0"
+                                        Content="Redact Company Information"
+                                        Foreground="White"
+                                        FontSize="14"
+                                        FontFamily="Montserrat"
+                                        Cursor="Hand"
+                                        Click="btnRedact_Click">        
+
+
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Background" Value="DarkBlue"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#28AEED"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Width="350" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                                        <ContentPresenter 
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button x:Name="btnCommit" 
+                                        Command="{Binding CommitCommand}"
+                                        BorderThickness="0"
+                                        Content="Commit changes"
+                                        Foreground="White"
+                                        FontSize="12"
+                                        FontFamily="Montserrat"
+                                        Cursor="Hand"                           
+                                        Margin="0,15,0,0"
+                                        Visibility="Collapsed"            
+                                        Click="btnCommit_Click">  
+
+                                                <Button.Style>
+                                                    <Style TargetType="Button">
+                                                        <Setter Property="Background" Value="DarkBlue"/>
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="#28AEED"/>
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+
+                                            <Button x:Name="btnCancelReadact" 
+                                        Command="{Binding CancelRedactCommand}"
+                                        BorderThickness="0"
+                                        Content="Cancel Readact"
+                                        Foreground="White"
+                                        FontSize="12"
+                                        FontFamily="Montserrat"
+                                        Cursor="Hand"                           
+                                        Margin="20,15,0,0"
+                                        Visibility="Collapsed"            
+                                        Click="btnCancelRedact_Click">
+
+                                                <Button.Style>
+                                                    <Style TargetType="Button">
+                                                        <Setter Property="Background" Value="DarkBlue"/>
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="#28AEED"/>
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+
+                                        </StackPanel>
                                     </StackPanel>
                                     <Grid Grid.Column="1">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        <Border Grid.Row="0" CornerRadius="10"  Margin="20, 30, 20, 10" Background="Orange"                               
+                                        <Border Grid.Row="0" CornerRadius="10"  Margin="5, 10, 10, 10" Background="Orange"                               
                                 BorderThickness="2" 
                                 Opacity="0.95">
                                             <Border.BorderBrush>
@@ -473,7 +701,7 @@
                                                 </LinearGradientBrush>
                                             </Border.BorderBrush>
                                             <StackPanel Margin="0, 0, 0, 0" HorizontalAlignment="Center" >
-                                                <Border CornerRadius="10"  Margin="20, 10, 20, 10"  
+                                                <Border CornerRadius="10"  Margin="20, 20, 20, 10"  
                                              Background="OrangeRed"
                                 BorderThickness="2" 
                                 Opacity="0.95">
@@ -522,7 +750,7 @@
                                                                 <Border Width="100" Height="100"
                                         CornerRadius="20"
                                         BorderThickness="2"
-                                        Margin="20, 0, 0, 20"
+                                        Margin="20, 0, 0, 10"
                                         Background="{TemplateBinding Background}">
                                                                     <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
@@ -562,7 +790,7 @@
                                                                 <Border Width="100" Height="100"
                                         CornerRadius="20"
                                         BorderThickness="2"
-                                        Margin="20, 0, 20, 20"
+                                        Margin="20, 0, 20, 10"
                                         Background="{TemplateBinding Background}">
                                                                     <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
@@ -581,7 +809,7 @@
                                                 </StackPanel>
                                             </StackPanel>
                                         </Border>
-                                        <Border CornerRadius="10" Margin="20, 0, 20, 20" Grid.Row="1" Background="LightGreen"
+                                        <Border CornerRadius="10" Margin="5, 0, 10, 10" Grid.Row="1" Background="LightGreen"
                                             BorderThickness="2" 
                                 Opacity="0.95">
                                             <Border.BorderBrush>
