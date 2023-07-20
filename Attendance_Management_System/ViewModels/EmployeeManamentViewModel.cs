@@ -85,11 +85,8 @@ namespace Attendance_Management_System.ViewModels
 
         private void EditEmployee(object parameter)
         {
-            Employee selectedEmployee = parameter as Employee;
-            if (selectedEmployee != null)
-            {
-                // Update selectedEmployee in the database
-            }
+            Employee selectedEmployee = parameter as Employee;            
+                LoadEmployees();
         }
 
         private void DeleteEmployee(object parameter)

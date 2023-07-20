@@ -93,9 +93,18 @@ namespace Attendance_Management_System.Views
                 viewModel.CheckOutCommand.Execute(selectedEmployee);
             }
         }
+        private void EditEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the selected employee from the data grid
+            Employee selectedEmployee = EmployeeDataGrid.SelectedItem as Employee;
 
-
-
+            // Check if the selected employee is not null before opening the EditEmployeeView
+            if (selectedEmployee != null)
+            {
+                EditEmployeeView editEmployeeView = new EditEmployeeView(selectedEmployee);
+                editEmployeeView.ShowDialog();
+            }
+        }
 
     }
 }
