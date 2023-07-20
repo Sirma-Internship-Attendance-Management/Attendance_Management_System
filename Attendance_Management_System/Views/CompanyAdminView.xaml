@@ -468,7 +468,7 @@
                                                                 <GradientStop Color="#8A16C1" Offset="1"/>
                                                             </LinearGradientBrush>
                                                         </Border.BorderBrush>
-                                                        <Image Source="Images/noLogo.png" Width="100" Height="100">
+                                                            <Image x:Name="imgLogo" Source="{Binding CompanyLogo}" Stretch="Fill" Width="100" Height="100">
                                                         </Image>
                                                     </Border>
                                                         <Button x:Name="btnlogoChange" Content="Change Logo" Visibility="Collapsed" Margin="10 0 10 10"

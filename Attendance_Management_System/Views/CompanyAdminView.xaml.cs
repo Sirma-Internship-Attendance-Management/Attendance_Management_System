@@ -1,6 +1,7 @@
 ﻿using Attendance_Management_System.DataAccess;
 using Attendance_Management_System.ViewModels;
 using Attendance_Management_System.Views.MessageBox;
+using Attendance_Management_System.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Attendance_Management_System.Views
 {
@@ -109,8 +112,64 @@ namespace Attendance_Management_System.Views
             openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
-                
+                System.Drawing.Image image = System.Drawing.Image.FromFile(openFileDialog.FileName);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    System.Drawing.Image img = System.Drawing.Image.FromFile(openFileDialog.FileName);
+                    byte[] logo = ConverImageToByte(img);
+                    UpdateCompanyLogotoDB(logo, 1);
+                    MyDbContext dbContext = new MyDbContext();
+                    Company company = (from c in dbContext.Companies
+                                      where c.CompanyId.Equals(_viewModel.LoggedCompany.CompanyId)
+                                      select c).FirstOrDefault();
+                    imgLogo.Source = ConvertToBitMapImage(byteArrToImg(company.Logo));
+                }
             }
+        }
+
+        static public BitmapImage ConvertToBitMapImage(System.Drawing.Image img)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                img.Save(memory, ImageFormat.Png);
+                memory.Position = 0;
+
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+
+                return bitmapImage;
+            }
+        }
+
+        static public byte[] ConverImageToByte(System.Drawing.Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return ms.ToArray();
+            }
+        }
+
+        static public System.Drawing.Image byteArrToImg(byte[] data)
+        {
+            using (MemoryStream ms = new MemoryStream(data))
+            {
+                return System.Drawing.Image.FromStream(ms);
+            }
+
+        }
+
+        private void UpdateCompanyLogotoDB(byte[] logo, int company_id)
+        {
+            MyDbContext contextDB = new MyDbContext();
+            var updateDB = contextDB.Companies.Where(company => company.CompanyId.Equals(company_id)).First();
+            updateDB.Logo = logo;
+            contextDB.SaveChanges();
+            MessageBoxSuccess mb = new MessageBoxSuccess();
+            mb.ShowDialog();
         }
 
         private void btnRedact_Click(object sender, RoutedEventArgs e)

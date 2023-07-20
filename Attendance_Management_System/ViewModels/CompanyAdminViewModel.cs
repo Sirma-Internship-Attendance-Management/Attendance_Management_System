@@ -3,10 +3,12 @@ using Attendance_Management_System.DataAccess;
 using Attendance_Management_System.Models;
 using Attendance_Management_System.Views;
 using Attendance_Management_System.Views.MessageBox;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Attendance_Management_System.ViewModels
 {
@@ -90,6 +92,19 @@ namespace Attendance_Management_System.ViewModels
             }
         }
 
+        private BitmapImage _companyLogo;
+        public BitmapImage CompanyLogo
+        {
+            get { return _companyLogo; }
+            set
+            {
+                if (_companyLogo != value)
+                {
+                    _companyLogo = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CompanyLogo)));
+                }
+            }
+        }
 
         //public string uc = "Under Construction!";
 
@@ -112,6 +127,12 @@ namespace Attendance_Management_System.ViewModels
             Type = LoggedCompany.Type;
             CompanyWebsite = LoggedCompany.Website;
             CompanyAddress = LoggedCompany.Address;
+            /*if(LoggedCompany.Logo==null)
+            {
+                CompanyLogo = new BitmapImage(new Uri("noLogo.png", UriKind.Relative));
+            }
+            else*/            
+            CompanyLogo = Views.CompanyAdminView.ConvertToBitMapImage(Views.CompanyAdminView.byteArrToImg(LoggedCompany.Logo));
         }
 
         public Company getLoggedInUserCompany(int company_id)
