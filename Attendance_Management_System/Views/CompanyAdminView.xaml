@@ -516,18 +516,21 @@
                                                                x:Name="lblCompanyName"
                                                                Content="{Binding CompanyName}"></Label>
                                                         <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="150" Visibility="Collapsed"
+                                                                 Text="{Binding CompanyName}"
                                                                  x:Name="tbCompanyName"> </TextBox>
                                                         <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Content="Industry Type:"></Label>
                                                         <Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" 
                                                                x:Name="lblIndustryType"
-                                                               Content="{Binding IndustryType}"></Label>
+                                                               Content="{Binding Type}"></Label>
                                                         <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="auto" Visibility="Collapsed"
+                                                                 Text="{Binding Type}"
                                                                  x:Name="tbIndustryType"></TextBox>
                                                         <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Content="Website:"></Label>
                                                         <Label Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" 
                                                                x:Name="lblWebsite"
                                                                Content="{Binding CompanyWebsite}"></Label>
                                                         <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Width="auto" Visibility="Collapsed"
+                                                                 Text="{Binding CompanyWebsite}"
                                                                  x:Name="tbWebsite"></TextBox>
                                                     </Grid>
                                                     <StackPanel Grid.Row="1" Grid.Column="0">
@@ -547,10 +550,11 @@
                                                             <RowDefinition Height="*"/>                                                                                                                      
                                                         </Grid.RowDefinitions>
                                                         <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Content="Address:"></Label>
-                                                        <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" 
+                                                        <Label Margin="43 0 0 0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" 
                                                                x:Name="lblAddress"
                                                                Content="{Binding CompanyAddress}"></Label>
-                                                        <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="193" Visibility="Collapsed"
+                                                        <TextBox Margin="43 0 0 0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Visibility="Collapsed"
+                                                                 Text="{Binding CompanyAddress}"
                                                                  x:Name="tbAddress"></TextBox>                                                        
                                                         
                                                         

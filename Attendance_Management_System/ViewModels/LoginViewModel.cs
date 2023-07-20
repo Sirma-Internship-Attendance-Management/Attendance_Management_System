@@ -18,6 +18,7 @@ namespace Attendance_Management_System.ViewModels
 
         private string _username;
         private SecureString _securePassword;
+        private User _loggedUser;
 
         public ICommand LoginCommand { get; }
         public ICommand ResetPasswordCommand { get; }
@@ -39,6 +40,16 @@ namespace Attendance_Management_System.ViewModels
             {
                 _securePassword = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SecurePassword)));
+            }
+        }
+
+        public User LoggedUser
+        {
+            get { return _loggedUser; }
+            set
+            {
+                _loggedUser = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LoggedUser)));
             }
         }
 
@@ -94,6 +105,7 @@ namespace Attendance_Management_System.ViewModels
             {
                 // Find the user with the provided username in the database
                 User user = dbContext.Users.FirstOrDefault(u => u.Username == username);
+                LoggedUser = user;                
                 return user;
             }
         }

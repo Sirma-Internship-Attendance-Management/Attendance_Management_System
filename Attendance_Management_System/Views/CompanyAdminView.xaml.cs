@@ -1,4 +1,5 @@
-﻿using Attendance_Management_System.ViewModels;
+﻿using Attendance_Management_System.DataAccess;
+using Attendance_Management_System.ViewModels;
 using Attendance_Management_System.Views.MessageBox;
 using System;
 using System.Collections.Generic;
@@ -130,8 +131,36 @@ namespace Attendance_Management_System.Views
 
         private void btnCommit_Click(object sender, RoutedEventArgs e)
         {
-            UnderConstruction uc = new UnderConstruction();
-            uc.ShowDialog();
+            tbCompanyName.Visibility = Visibility.Collapsed;
+            tbIndustryType.Visibility = Visibility.Collapsed;
+            tbWebsite.Visibility = Visibility.Collapsed;
+            tbAddress.Visibility = Visibility.Collapsed;
+            lblCompanyName.Visibility = Visibility.Visible;
+            lblIndustryType.Visibility = Visibility.Visible;
+            lblWebsite.Visibility = Visibility.Visible;
+            lblAddress.Visibility = Visibility.Visible;
+            btnlogoChange.Visibility = Visibility.Collapsed;
+            btnCommit.Visibility = Visibility.Collapsed;
+            btnCancelReadact.Visibility = Visibility.Collapsed;
+            btnRedact.Visibility = Visibility.Visible;
+            UpdateDataBase();
+            MessageBoxSuccess mb = new MessageBoxSuccess();
+            mb.ShowDialog();            
+            //UnderConstruction uc = new UnderConstruction();
+            //uc.ShowDialog();
+        }
+
+        private void UpdateDataBase()
+        {
+            MyDbContext dbContext = new MyDbContext();
+            var updateDB = dbContext.Companies.Where(company => company.CompanyId.Equals(_viewModel.LoggedCompany.CompanyId)).First();
+            updateDB.CompanyName = _viewModel.LoggedCompany.CompanyName;
+            updateDB.Type = _viewModel.LoggedCompany.Type;
+            updateDB.Website = _viewModel.LoggedCompany.Website;
+            updateDB.Address = _viewModel.LoggedCompany.Address;
+            updateDB.Logo = _viewModel.LoggedCompany.Logo;
+            dbContext.SaveChanges();    
+            
         }
         private void btnCancelRedact_Click(object sender, RoutedEventArgs e)
         {
@@ -147,6 +176,8 @@ namespace Attendance_Management_System.Views
             btnCommit.Visibility = Visibility.Collapsed;
             btnCancelReadact.Visibility = Visibility.Collapsed;
             btnRedact.Visibility = Visibility.Visible;
+            _viewModel.LoggedCompany = _viewModel.getLoggedInUserCompany(1);
+            _viewModel.CompanyInformationBinding();
         }
 
     }
