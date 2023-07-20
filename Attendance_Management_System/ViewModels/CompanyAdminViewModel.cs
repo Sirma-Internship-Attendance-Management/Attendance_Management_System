@@ -106,7 +106,7 @@ namespace Attendance_Management_System.ViewModels
             }
         }
 
-        public CompanyAdminViewModel()
+        public CompanyAdminViewModel(User LoggedUser)
         {
             OpenCommand = new RelayCommand(OpenEmployeeManagementView);
             OpenCommand2 = new RelayCommand(OpenAttendanceView);
@@ -114,7 +114,7 @@ namespace Attendance_Management_System.ViewModels
             SettingsCommand = new RelayCommand(OpenSettingsView);
             InfoCommand = new RelayCommand(OpenInfoView);
             LogoutCommand = new RelayCommand(OpenLogoutMB);
-            LoggedCompany = getLoggedInUserCompany(1);
+            LoggedCompany = getLoggedInUserCompany(LoggedUser.CompanyId);
             CompanyInformationBinding();
         }
 

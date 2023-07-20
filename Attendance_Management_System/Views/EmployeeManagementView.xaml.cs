@@ -20,6 +20,11 @@ namespace Attendance_Management_System.Views
     /// </summary>
     public partial class EmployeeManagementView : Window
     {
+        public EmployeeManagementView(Company LoggedCompany)
+        {
+            InitializeComponent();
+            DataContext = new EmployeeManagementViewModel();
+        }
         public EmployeeManagementView()
         {            
             InitializeComponent();

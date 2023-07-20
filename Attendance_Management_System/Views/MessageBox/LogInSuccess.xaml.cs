@@ -11,6 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Attendance_Management_System.DataAccess;
+using Attendance_Management_System.ViewModels;
+using Attendance_Management_System.Views.MessageBox;
+using Attendance_Management_System.Models;
 
 namespace Attendance_Management_System.Views.MessageBox
 {
@@ -19,15 +23,17 @@ namespace Attendance_Management_System.Views.MessageBox
     /// </summary>
     public partial class LogInSuccess : Window
     {
-        public LogInSuccess()
+        public User LoggedUser { get; set; }
+        public LogInSuccess(User Loggeduser)
         {
             InitializeComponent();
+            LoggedUser = Loggeduser;
         }
 
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            CompanyAdminView companyAdminView = new CompanyAdminView();
+            CompanyAdminView companyAdminView = new CompanyAdminView(LoggedUser);
             companyAdminView.Show();
 
             Application.Current.MainWindow?.Close();

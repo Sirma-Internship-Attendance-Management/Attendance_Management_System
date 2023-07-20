@@ -68,7 +68,7 @@ namespace Attendance_Management_System.ViewModels
 
             if (isAuthenticated)
             {
-                LogInSuccess lgs = new LogInSuccess();
+                LogInSuccess lgs = new LogInSuccess(LoggedUser);
                 lgs.ShowDialog();
                 Application.Current.MainWindow?.Close();
             }

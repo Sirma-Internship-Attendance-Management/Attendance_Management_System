@@ -29,12 +29,12 @@ namespace Attendance_Management_System.Views
     {
         private readonly CompanyAdminViewModel _viewModel;
 
-        public CompanyAdminView()
+        public CompanyAdminView(User LoggedUser)
         {
             InitializeComponent();
-            _viewModel = new CompanyAdminViewModel();
+            _viewModel = new CompanyAdminViewModel(LoggedUser);
             DataContext = _viewModel;
-        }
+        }        
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
