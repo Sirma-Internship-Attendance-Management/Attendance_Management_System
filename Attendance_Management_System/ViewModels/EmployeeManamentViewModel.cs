@@ -127,34 +127,26 @@ namespace Attendance_Management_System.ViewModels
 
             if (selectedEmployee != null)
             {
-                bool alreadyCheckedIn = Attendance.Any(a => a.EmployeeId == selectedEmployee.EmployeeId);
-
-                if (alreadyCheckedIn)
+                using (var dbContext = new MyDbContext())
                 {
-                    MessageBox.Show($"Employee {selectedEmployee.Name} is already checked in.");
-                }
-                else
-                {
-                    using (var dbContext = new MyDbContext())
+                    var attendance = new Attendance
                     {
-                        var attendance = new Attendance
-                        {
-                            EmployeeId = selectedEmployee.EmployeeId,
-                            CheckInTime = DateTime.Now
-                        };
-                        dbContext.AttendanceRecords.Add(attendance);
-                        dbContext.SaveChanges();
-                    }
-
-                    LoadAttendance();
-                    MessageBox.Show($"Employee {selectedEmployee.Name} checked in.");
+                        EmployeeId = selectedEmployee.EmployeeId,
+                        CheckInTime = DateTime.Now
+                    };
+                    dbContext.AttendanceRecords.Add(attendance);
+                    dbContext.SaveChanges();
                 }
+
+                LoadAttendance();
+                MessageBox.Show($"Employee {selectedEmployee.Name} checked in.");
             }
             else
             {
                 MessageBox.Show("Please select a valid employee.");
             }
         }
+
 
         private bool CanCheckIn(object parameter)
         {
@@ -169,29 +161,33 @@ namespace Attendance_Management_System.ViewModels
 
             if (selectedEmployee != null)
             {
-                var attendance = Attendance.FirstOrDefault(a => a.EmployeeId == selectedEmployee.EmployeeId && a.CheckOutTime == null);
-
-                if (attendance != null)
+                using (var dbContext = new MyDbContext())
                 {
-                    using (var dbContext = new MyDbContext())
+                    var latestCheckIn = dbContext.AttendanceRecords
+                        .Where(a => a.EmployeeId == selectedEmployee.EmployeeId && a.CheckOutTime == null)
+                        .OrderByDescending(a => a.CheckInTime)
+                        .FirstOrDefault();
+
+                    if (latestCheckIn != null)
                     {
-                        attendance.CheckOutTime = DateTime.Now;
+                        latestCheckIn.CheckOutTime = DateTime.Now;
                         dbContext.SaveChanges();
                     }
+                    else
+                    {
+                        MessageBox.Show($"Employee {selectedEmployee.Name} has not checked in.");
+                    }
+                }
 
-                    LoadAttendance();
-                    MessageBox.Show($"Employee {selectedEmployee.Name} checked out.");
-                }
-                else
-                {
-                    MessageBox.Show($"Employee {selectedEmployee.Name} has not checked in.");
-                }
+                LoadAttendance();
+                MessageBox.Show($"Employee {selectedEmployee.Name} checked out.");
             }
             else
             {
                 MessageBox.Show("Please select a valid employee.");
             }
         }
+
 
         private bool CanCheckOut(object parameter)
         {
