@@ -17,7 +17,9 @@
         AllowsTransparency="True"
         MouseDown="Window_MouseDown"
         Icon="Images/icon.ico"
-        Title="Company Administration" Height="450" Width="800">
+        Title="Company Administration"
+        Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Border CornerRadius="12">
         <!--<Border.Background>
             <ImageBrush ImageSource="" Stretch="None"/>
@@ -41,7 +43,7 @@
                     <GradientStop Color="#1B1448" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <Grid>            
+            <Grid>
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -159,24 +161,39 @@
                 </Grid>
                 <StackPanel Margin="20" Grid.Row="1">
 
-                        <TextBlock Text="Employee Management" 
+                    <TextBlock Text="Employee Management" 
                                    FontSize="25"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
                                HorizontalAlignment="Center">
-                            <TextBlock.Foreground>
-                                <LinearGradientBrush>
-                                    <GradientStop Color="#2af598" Offset="1"/>
-                                    <GradientStop Color="#009efd" Offset="0.3"/>
-                                </LinearGradientBrush>
-                            </TextBlock.Foreground>
-                        </TextBlock>
+                        <TextBlock.Foreground>
+                            <LinearGradientBrush>
+                                <GradientStop Color="#2af598" Offset="1"/>
+                                <GradientStop Color="#009efd" Offset="0.3"/>
+                            </LinearGradientBrush>
+                        </TextBlock.Foreground>
+                    </TextBlock>
 
                     <DataGrid x:Name="EmployeeDataGrid" ItemsSource="{Binding Employees}" AutoGenerateColumns="False" Margin="0 15 0 10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
                             <DataGridTextColumn Header="Position" Binding="{Binding Position}" Width="*"/>
                             <DataGridTextColumn Header="Contact Details" Binding="{Binding ContactDetails}" Width="*"/>
+                            <DataGridTemplateColumn Width="Auto">
+                                <DataGridTemplateColumn.Header>
+                                    <TextBlock Text="Check In/Out" Foreground="White" HorizontalAlignment="Center"/>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Content="Check In" Command="{Binding CheckInCommand}" Click="CheckIn_Click" CommandParameter="{Binding SelectedItem, ElementName=EmployeeDataGrid}" />
+                                            <Button Content="Check Out" Command="{Binding CheckOutCommand}" Click="CheckOut_Click" CommandParameter="{Binding SelectedItem, ElementName=EmployeeDataGrid}" />
+
+
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -185,8 +202,8 @@
                         <Button Content="Edit Employee" Command="{Binding EditEmployeeCommand}" Margin="0 0 10 0"/>
                         <Button Content="Delete Employee" Command="{Binding DeleteEmployeeCommand}" Click="DeleteEmployee_Click"/>
                     </StackPanel>
-        </StackPanel>
+                </StackPanel>
             </Grid>
-    </Border>
+        </Border>
     </Border>
 </Window>

@@ -1,23 +1,53 @@
-﻿using Attendance_Management_System.Models;
+﻿using Attendance_Management_System.Commands;
+using Attendance_Management_System.DataAccess;
+using Attendance_Management_System.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows.Input;
 
 namespace Attendance_Management_System.ViewModels
 {
     public class AttendanceViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Attendance> Attendances { get; set; }
+        private ObservableCollection<Attendance> _attendances;
+        private Employee _selectedEmployee;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ObservableCollection<Attendance> Attendances
+        {
+            get { return _attendances; }
+            set
+            {
+                _attendances = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Attendances)));
+            }
+        }
+
+        public Employee SelectedEmployee
+        {
+            get { return _selectedEmployee; }
+            set
+            {
+                _selectedEmployee = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedEmployee)));
+            }
+        }
 
         public AttendanceViewModel()
         {
-            Attendances = new ObservableCollection<Attendance>();
-            Attendances.Add(new Attendance { AttendanceId = 1, EmployeeId = 1, EventId = 1, CheckInTime = DateTime.Now, CheckOutTime = DateTime.Now.AddHours(2) });
-            Attendances.Add(new Attendance { AttendanceId = 2, EmployeeId = 2, EventId = 1, CheckInTime = DateTime.Now, CheckOutTime = DateTime.Now.AddHours(3) });
-            Attendances.Add(new Attendance { AttendanceId = 3, EmployeeId = 1, EventId = 2, CheckInTime = DateTime.Now, CheckOutTime = DateTime.Now.AddHours(1) });
-            Attendances.Add(new Attendance { AttendanceId = 4, EmployeeId = 3, EventId = 1, CheckInTime = DateTime.Now, CheckOutTime = DateTime.Now.AddHours(4) });
+            LoadAttendances();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private void LoadAttendances()
+        {
+            using (var dbContext = new MyDbContext())
+            {
+                var attendances = dbContext.AttendanceRecords.ToList();
+                Attendances = new ObservableCollection<Attendance>(attendances);
+            }
+        }
     }
 }
