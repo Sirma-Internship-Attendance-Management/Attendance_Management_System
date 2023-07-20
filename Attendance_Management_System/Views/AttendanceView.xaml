@@ -174,8 +174,9 @@
 
                     <DataGrid ItemsSource="{Binding Attendances}" AutoGenerateColumns="False" Margin="0 15 0 10">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Attendance ID" Binding="{Binding AttendanceId}" Width="*"/>
+                            <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" Width="*"/>
                             <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeId}" Width="*"/>
+                            <DataGridTextColumn Header="Attendance ID" Binding="{Binding AttendanceId}" Width="*"/>
                             <DataGridTextColumn Header="Check-In Time" Binding="{Binding CheckInTime}" Width="*"/>
                             <DataGridTextColumn Header="Check-Out Time" Binding="{Binding CheckOutTime}" Width="*"/>
                         </DataGrid.Columns>
