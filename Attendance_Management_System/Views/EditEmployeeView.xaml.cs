@@ -8,12 +8,14 @@ namespace Attendance_Management_System.Views
     public partial class EditEmployeeView : Window
     {
         private EditEmployeeViewModel _viewModel;
+        public Company LoggedCompany { get; set; }
 
-        public EditEmployeeView(Employee selectedEmployee)
+        public EditEmployeeView(Employee selectedEmployee, Company Loggedcompany)
         {
             InitializeComponent();
-            DataContext = new EditEmployeeViewModel(selectedEmployee);
-
+            LoggedCompany = Loggedcompany;
+            DataContext = new EditEmployeeViewModel(selectedEmployee, Loggedcompany);
+            
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

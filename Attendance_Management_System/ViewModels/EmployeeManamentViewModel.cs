@@ -10,10 +10,12 @@ using System.Windows.Input;
 
 namespace Attendance_Management_System.ViewModels
 {
+    
     public class EmployeeManagementViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Employee> _employees;
         private ObservableCollection<Attendance> _attendance;
+        public Company LoggedCompany { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -43,8 +45,9 @@ namespace Attendance_Management_System.ViewModels
         public RelayCommand CheckInCommand { get; }
         public RelayCommand CheckOutCommand { get; }
 
-        public EmployeeManagementViewModel()
+        public EmployeeManagementViewModel(Company Loggedcompany)
         {
+            LoggedCompany = Loggedcompany;
             AddEmployeeCommand = new RelayCommand(AddEmployee);
             EditEmployeeCommand = new RelayCommand(EditEmployee, CanEditOrDeleteEmployee);
             DeleteEmployeeCommand = new RelayCommand(DeleteEmployee, CanEditOrDeleteEmployee);

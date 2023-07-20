@@ -1,4 +1,5 @@
 ﻿using Attendance_Management_System.ViewModels;
+using Attendance_Management_System.Models;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -7,10 +8,13 @@ namespace Attendance_Management_System.Views
 {
     public partial class AttendanceView : Window
     {
-        public AttendanceView()
+
+        public Company LoggedCompany { get; set; }
+        public AttendanceView(Company Loggedcompany)
         {
             InitializeComponent();
-            DataContext = new AttendanceViewModel();
+            LoggedCompany = Loggedcompany;
+            DataContext = new AttendanceViewModel(LoggedCompany);
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

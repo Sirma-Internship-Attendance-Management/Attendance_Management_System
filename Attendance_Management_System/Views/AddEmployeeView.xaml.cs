@@ -1,4 +1,5 @@
-﻿using Attendance_Management_System.ViewModels;
+﻿using Attendance_Management_System.Models;
+using Attendance_Management_System.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,11 @@ namespace Attendance_Management_System.Views
     /// </summary>
     public partial class AddEmployeeView : Window
     {
-        public AddEmployeeView()
+        public Company LoggedCompany { get; set; }
+        public AddEmployeeView(Company Loggedcompany)
         {
             InitializeComponent();            
-           
+            LoggedCompany = Loggedcompany;
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

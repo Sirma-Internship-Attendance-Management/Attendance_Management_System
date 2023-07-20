@@ -20,16 +20,14 @@ namespace Attendance_Management_System.Views
     /// </summary>
     public partial class EmployeeManagementView : Window
     {
-        public EmployeeManagementView(Company LoggedCompany)
+        public Company LoggedCompany { get; set; }
+        public EmployeeManagementView(Company Loggedcompany)
         {
             InitializeComponent();
-            DataContext = new EmployeeManagementViewModel();
+            LoggedCompany = Loggedcompany;
+            DataContext = new EmployeeManagementViewModel(LoggedCompany);
         }
-        public EmployeeManagementView()
-        {            
-            InitializeComponent();
-            DataContext = new EmployeeManagementViewModel();
-        }
+        
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -61,7 +59,7 @@ namespace Attendance_Management_System.Views
         }
         private void AddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            AddEmployeeView addEmployeeView = new AddEmployeeView();
+            AddEmployeeView addEmployeeView = new AddEmployeeView(LoggedCompany);
             addEmployeeView.ShowDialog();
         }
         private void DeleteEmployee_Click(object sender, RoutedEventArgs e)
@@ -106,7 +104,7 @@ namespace Attendance_Management_System.Views
             // Check if the selected employee is not null before opening the EditEmployeeView
             if (selectedEmployee != null)
             {
-                EditEmployeeView editEmployeeView = new EditEmployeeView(selectedEmployee);
+                EditEmployeeView editEmployeeView = new EditEmployeeView(selectedEmployee, LoggedCompany);
                 editEmployeeView.ShowDialog();
             }
         }

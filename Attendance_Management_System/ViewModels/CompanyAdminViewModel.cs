@@ -144,13 +144,13 @@ namespace Attendance_Management_System.ViewModels
         }
         private void OpenEmployeeManagementView(object parameter)
         {
-            EmployeeManagementView empman = new EmployeeManagementView();
+            EmployeeManagementView empman = new EmployeeManagementView(LoggedCompany);
             empman.Show();
         }
 
         private void OpenAttendanceView(object parameter)
         {
-            AttendanceView attendanceView = new AttendanceView();
+            AttendanceView attendanceView = new AttendanceView(LoggedCompany);
             attendanceView.Show();
         }
 

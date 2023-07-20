@@ -16,6 +16,8 @@ namespace Attendance_Management_System.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public Company LoggedCompany { get; set; }
+
         public Employee SelectedEmployee
         {
             get { return _selectedEmployee; }
@@ -63,11 +65,11 @@ namespace Attendance_Management_System.ViewModels
         {
         }
 
-        public EditEmployeeViewModel(Employee selectedEmployee)
+        public EditEmployeeViewModel(Employee selectedEmployee, Company Loggedcompany)
         {
             SelectedEmployee = selectedEmployee;
             InitializeProperties();
-
+            LoggedCompany = Loggedcompany;
             SaveCommand = new RelayCommand(SaveChanges, CanSaveChanges);
             CancelCommand = new RelayCommand(Cancel);
             

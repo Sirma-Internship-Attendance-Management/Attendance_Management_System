@@ -21,9 +21,12 @@ namespace Attendance_Management_System.ViewModels
             }
         }
 
-        public AttendanceViewModel()
+        public Company LoggedCompany { get; set; }
+
+        public AttendanceViewModel(Company Loggedcompany)
         {
             LoadAttendances();
+            LoggedCompany = Loggedcompany;
         }
 
         private void LoadAttendances()
