@@ -28,10 +28,13 @@ namespace Attendance_Management_System.Views
     public partial class CompanyAdminView : Window
     {
         private readonly CompanyAdminViewModel _viewModel;
+        
+        public User LoggedUser { get; set; }
 
-        public CompanyAdminView(User LoggedUser)
+        public CompanyAdminView(User Loggeduser)
         {
             InitializeComponent();
+            LoggedUser = Loggeduser;
             _viewModel = new CompanyAdminViewModel(LoggedUser);
             DataContext = _viewModel;
         }        
@@ -117,7 +120,7 @@ namespace Attendance_Management_System.Views
                 {
                     System.Drawing.Image img = System.Drawing.Image.FromFile(openFileDialog.FileName);
                     byte[] logo = ConverImageToByte(img);
-                    UpdateCompanyLogotoDB(logo, 1);
+                    UpdateCompanyLogotoDB(logo, LoggedUser.CompanyId);
                     MyDbContext dbContext = new MyDbContext();
                     Company company = (from c in dbContext.Companies
                                       where c.CompanyId.Equals(_viewModel.LoggedCompany.CompanyId)
