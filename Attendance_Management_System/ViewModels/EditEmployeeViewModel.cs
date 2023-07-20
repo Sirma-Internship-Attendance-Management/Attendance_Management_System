@@ -59,10 +59,8 @@ namespace Attendance_Management_System.ViewModels
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
 
-        // Parameterless constructor required for XAML
         public EditEmployeeViewModel()
         {
-            // Initialize properties or perform any other required actions here
         }
 
         public EditEmployeeViewModel(Employee selectedEmployee)
@@ -84,7 +82,6 @@ namespace Attendance_Management_System.ViewModels
 
         private bool CanSaveChanges(object parameter)
         {
-            // Add validation logic here if needed
             return true;
         }
 

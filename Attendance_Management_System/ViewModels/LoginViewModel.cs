@@ -70,8 +70,6 @@ namespace Attendance_Management_System.ViewModels
             {
                 LogInSuccess lgs = new LogInSuccess();
                 lgs.ShowDialog();
-
-                // Close the login window and open the main application window
                 Application.Current.MainWindow?.Close();
             }
             else
@@ -92,7 +90,6 @@ namespace Attendance_Management_System.ViewModels
 
             if (storedUser != null)
             {
-                // Replace the placeholder VerifyPassword method with your actual password hashing and salting implementation
                 return VerifyPassword(password, storedUser.Password);
             }
 
@@ -103,7 +100,6 @@ namespace Attendance_Management_System.ViewModels
         {
             using (var dbContext = new MyDbContext())
             {
-                // Find the user with the provided username in the database
                 User user = dbContext.Users.FirstOrDefault(u => u.Username == username);
                 LoggedUser = user;                
                 return user;

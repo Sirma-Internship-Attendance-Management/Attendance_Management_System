@@ -106,7 +106,6 @@ namespace Attendance_Management_System.ViewModels
                             dbContext.SaveChanges();
                         }
                     }
-
                     Employees.Remove(selectedEmployee);
                     LoadEmployees();
                 }
@@ -143,7 +142,6 @@ namespace Attendance_Management_System.ViewModels
                 MessageBox.Show("Please select a valid employee.");
             }
         }
-
 
         private bool CanCheckIn(object parameter)
         {

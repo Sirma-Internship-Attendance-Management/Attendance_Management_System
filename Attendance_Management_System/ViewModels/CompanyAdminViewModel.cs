@@ -106,8 +106,6 @@ namespace Attendance_Management_System.ViewModels
             }
         }
 
-        //public string uc = "Under Construction!";
-
         public CompanyAdminViewModel()
         {
             OpenCommand = new RelayCommand(OpenEmployeeManagementView);
@@ -116,7 +114,6 @@ namespace Attendance_Management_System.ViewModels
             SettingsCommand = new RelayCommand(OpenSettingsView);
             InfoCommand = new RelayCommand(OpenInfoView);
             LogoutCommand = new RelayCommand(OpenLogoutMB);
-            //int companyID = 1;
             LoggedCompany = getLoggedInUserCompany(1);
             CompanyInformationBinding();
         }
@@ -127,12 +124,14 @@ namespace Attendance_Management_System.ViewModels
             Type = LoggedCompany.Type;
             CompanyWebsite = LoggedCompany.Website;
             CompanyAddress = LoggedCompany.Address;
-            /*if(LoggedCompany.Logo==null)
+            if (LoggedCompany.Logo == null)
             {
                 CompanyLogo = new BitmapImage(new Uri("noLogo.png", UriKind.Relative));
             }
-            else*/            
-            CompanyLogo = Views.CompanyAdminView.ConvertToBitMapImage(Views.CompanyAdminView.byteArrToImg(LoggedCompany.Logo));
+            else
+            {
+                CompanyLogo = Views.CompanyAdminView.ConvertToBitMapImage(Views.CompanyAdminView.byteArrToImg(LoggedCompany.Logo));
+            }
         }
 
         public Company getLoggedInUserCompany(int company_id)
@@ -174,14 +173,10 @@ namespace Attendance_Management_System.ViewModels
             uc.ShowDialog();
         }
 
-        private void OpenLogoutMB (object parameter)
+        private void OpenLogoutMB(object parameter)
         {
-
-            //Application.Current.MainWindow?.Close();
             LogoutNotification lgn = new LogoutNotification();
             lgn.ShowDialog();
-            
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

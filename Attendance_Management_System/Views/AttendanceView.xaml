@@ -19,10 +19,6 @@
         Title="Attendance Management" Height="450" Width="800">
 
     <Border CornerRadius="12">
-        <!--<Border.Background>
-            <ImageBrush ImageSource="" Stretch="None"/>
-        </Border.Background>-->
-
         <Border CornerRadius="10"                    
             BorderThickness="2"
             Opacity="0.95">
@@ -181,7 +177,6 @@
                             <DataGridTextColumn Header="Check-Out Time" Binding="{Binding CheckOutTime}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Calendar/>
 
                 </StackPanel>
             </Grid>
