@@ -10,7 +10,18 @@ namespace Attendance_Management_System.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private ObservableCollection<Employee> _employees;
         private ObservableCollection<Attendance> _attendances;
+
+        public ObservableCollection<Employee> Employees
+        {
+            get { return _employees; }
+            set
+            {
+                _employees = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Employees)));
+            }
+        }
         public ObservableCollection<Attendance> Attendances
         {
             get { return _attendances; }
@@ -25,17 +36,44 @@ namespace Attendance_Management_System.ViewModels
 
         public AttendanceViewModel(Company Loggedcompany)
         {
-            LoadAttendances();
             LoggedCompany = Loggedcompany;
+            LoadEmployees();
+            //Employees = LoadEmployees(Employees, LoggedCompany);
+            LoadAttendances();
+            
         }
+
+        private void LoadEmployees()
+        {
+            using (var dbContext = new MyDbContext())
+            {
+                var employees = dbContext.Employees.Where(e => e.CompanyId.Equals(LoggedCompany.CompanyId)).ToList();
+                Employees = new ObservableCollection<Employee>(employees);
+            }
+        }
+
+        /*private static ObservableCollection<Employee> LoadEmployees(ObservableCollection<Employee> EmployeesList, Company loggedcompany)
+        {
+            using (var dbContext = new MyDbContext())
+            {
+                var employees = dbContext.Employees.Where(e => e.CompanyId.Equals(loggedcompany.CompanyId)).ToList();
+                EmployeesList = new ObservableCollection<Employee>(employees);
+                return EmployeesList;
+            }
+        }*/
 
         private void LoadAttendances()
         {
             using (var dbContext = new MyDbContext())
             {
-                var attendances = dbContext.AttendanceRecords.ToList();
-                Attendances = new ObservableCollection<Attendance>(attendances);
+                //var employees = dbContext.Employees.Where(e => e.CompanyId.Equals(LoggedCompany.CompanyId)).ToList();
+                //Employees = new ObservableCollection<Employee>(employees);                
+                var employeeIds = Employees.Select(e => e.EmployeeId).ToList();
+                var attendanceRecords = dbContext.AttendanceRecords.Where(a => employeeIds.Contains(a.EmployeeId)).ToList();
+                Attendances = new ObservableCollection<Attendance>(attendanceRecords);
             }
+
+
 
             // After loading the attendances, you can populate the EmployeeName property for each Attendance.
             using (var dbContext = new MyDbContext())

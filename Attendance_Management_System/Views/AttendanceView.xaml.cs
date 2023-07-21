@@ -14,7 +14,8 @@ namespace Attendance_Management_System.Views
         {
             InitializeComponent();
             LoggedCompany = Loggedcompany;
-            DataContext = new AttendanceViewModel(LoggedCompany);
+            AttendanceViewModel _viewModel = new AttendanceViewModel(LoggedCompany);
+            DataContext = _viewModel;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

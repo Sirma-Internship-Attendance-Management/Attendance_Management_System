@@ -74,6 +74,8 @@ namespace Attendance_Management_System.ViewModels
         {
             using (var dbContext = new MyDbContext())
             {
+                //var employees = dbContext.Employees.Where(e => e.CompanyId.Equals(LoggedCompany.CompanyId)).ToList();
+                //Employees = new ObservableCollection<Employee>(employees);
                 var employeeIds = Employees.Select(e=>e.EmployeeId).ToList();
                 var attendanceRecords = dbContext.AttendanceRecords.Where(a => employeeIds.Contains(a.EmployeeId)).ToList();                
                 Attendance = new ObservableCollection<Attendance>(attendanceRecords);
