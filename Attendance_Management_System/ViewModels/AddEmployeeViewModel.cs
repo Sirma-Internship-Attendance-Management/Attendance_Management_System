@@ -1,6 +1,8 @@
 ﻿using Attendance_Management_System.Commands;
 using Attendance_Management_System.DataAccess;
 using Attendance_Management_System.Models;
+using Attendance_Management_System.Views;
+using Attendance_Management_System.Views.MessageBox;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -104,7 +106,9 @@ namespace Attendance_Management_System.ViewModels
                 Employees.Add(newEmployee);
 
                 ClearFields();
-                MessageBox.Show("You successfully added employee!");
+                MessageBoxSuccess mb = new MessageBoxSuccess();
+                mb.ShowDialog();
+                //MessageBox.Show("You successfully added employee!");
             }
         }
 

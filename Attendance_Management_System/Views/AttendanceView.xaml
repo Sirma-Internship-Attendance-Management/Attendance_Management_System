@@ -16,7 +16,7 @@
         AllowsTransparency="True"
         MouseDown="Window_MouseDown"
         Icon="Images/icon.ico"
-        Title="Attendance Management" Height="450" Width="800">
+        Title="Attendance Management" Height="Auto" Width="800">
 
     <Border CornerRadius="12">
         <Border CornerRadius="10"                    
@@ -154,8 +154,26 @@
                     </Button>
                 </Grid>
                 <StackPanel Margin="20" Grid.Row="1">
+                <materialDesign:TransitioningContent>
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="SlideInFromTop" Duration="0:0:0.8"/>
+                        <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8"/>
+                    </materialDesign:TransitioningContent.OpeningEffects>
 
-                    <TextBlock Text="Attendance Management" 
+                    <StackPanel>
+
+
+                    <Border CornerRadius="10"  Margin="0, 0, 0, 0" Padding="5"                                 
+                                BorderThickness="2" 
+                                Opacity="0.95">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#462AD8" Offset="0"/>
+                                <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                <GradientStop Color="#8A16C1" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <TextBlock Text="Attendance Management Report" 
                                FontSize="25"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
@@ -167,7 +185,7 @@
                             </LinearGradientBrush>
                         </TextBlock.Foreground>
                     </TextBlock>
-
+                    </Border>
                     <DataGrid ItemsSource="{Binding Attendances}" AutoGenerateColumns="False" Margin="0 15 0 10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" Width="*"/>
@@ -178,6 +196,8 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
+                </StackPanel>
+                    </materialDesign:TransitioningContent>
                 </StackPanel>
             </Grid>
         </Border>

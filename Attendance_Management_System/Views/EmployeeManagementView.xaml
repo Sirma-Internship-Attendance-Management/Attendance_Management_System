@@ -18,7 +18,7 @@
         MouseDown="Window_MouseDown"
         Icon="Images/icon.ico"
         Title="Company Administration"
-        Height="450" Width="800"
+        Height="Auto" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Border CornerRadius="12">
         <!--<Border.Background>
@@ -160,7 +160,22 @@
                     </Button>
                 </Grid>
                 <StackPanel Margin="20" Grid.Row="1">
-
+                    <materialDesign:TransitioningContent>
+                        <materialDesign:TransitioningContent.OpeningEffects>
+                            <materialDesign:TransitionEffect Kind="SlideInFromTop" Duration="0:0:0.8"/>
+                            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8"/>
+                        </materialDesign:TransitioningContent.OpeningEffects>
+                        <StackPanel>
+                    <Border CornerRadius="10"  Margin="0, 0, 0, 0" Padding="5"                                 
+                                BorderThickness="2" 
+                                Opacity="0.95">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#462AD8" Offset="0"/>
+                                <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                <GradientStop Color="#8A16C1" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
                     <TextBlock Text="Employee Management" 
                                    FontSize="25"
                                FontWeight="Medium"
@@ -173,7 +188,7 @@
                             </LinearGradientBrush>
                         </TextBlock.Foreground>
                     </TextBlock>
-
+                    </Border>
                     <DataGrid x:Name="EmployeeDataGrid" ItemsSource="{Binding Employees}" AutoGenerateColumns="False" Margin="0 15 0 10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
@@ -197,11 +212,106 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
-                        <Button Content="Add Employee" Command="{Binding AddEmployeeCommand}" Margin="0 0 10 0" Click="AddEmployee_Click"/>
-                        <Button Content="Edit Employee" Command="{Binding EditEmployeeCommand}" Margin="0 0 10 0" Click="EditEmployee_Click"/>
-                        <Button Content="Delete Employee" Command="{Binding DeleteEmployeeCommand}" Click="DeleteEmployee_Click"/>
+                    <StackPanel Orientation="Horizontal" Margin="0 15 0 0" HorizontalAlignment="Center">                       
+
+                        <Button x:Name="btnAdd"
+                        Command="{Binding AddEmployeeCommand}"
+                        Margin="0,0,0,0"                           
+                        BorderThickness="0"
+                        Content="Add Employee"
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Montserrat"
+                        Cursor="Hand"
+                        Click="AddEmployee_Click">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#462AD8"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#28AEED"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        
+                        <Button x:Name="btnEdit"
+                        Command="{Binding EditEmployeeCommand}"
+                        Margin="15,0,0,0"                           
+                        BorderThickness="0"
+                        Content="Edit Employee"
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Montserrat"
+                        Cursor="Hand"
+                        Click="EditEmployee_Click">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#462AD8"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#28AEED"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>                      
+                       
+                        <Button x:Name="btnDelete"
+                        Command="{Binding DeleteEmployeeCommand}"
+                        Margin="15,0,0,0"                           
+                        BorderThickness="0"
+                        Content="Delete Employee"
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Montserrat"
+                        Cursor="Hand"
+                        Click="DeleteEmployee_Click">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#462AD8"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#28AEED"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
                     </StackPanel>
+                </StackPanel>
+                    </materialDesign:TransitioningContent>
                 </StackPanel>
             </Grid>
         </Border>

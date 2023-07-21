@@ -1,6 +1,7 @@
 ﻿using Attendance_Management_System.Commands;
 using Attendance_Management_System.DataAccess;
 using Attendance_Management_System.Models;
+using Attendance_Management_System.Views.MessageBox;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -102,7 +103,9 @@ namespace Attendance_Management_System.ViewModels
                 }
             }
 
-            MessageBox.Show("Employee updated successfully!");
+            //MessageBox.Show("Employee updated successfully!");
+            MessageBoxSuccess mb = new MessageBoxSuccess();
+            mb.ShowDialog();
 
             CloseWindow(parameter);
         }

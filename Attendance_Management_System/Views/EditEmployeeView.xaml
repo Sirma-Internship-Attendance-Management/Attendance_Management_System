@@ -26,8 +26,29 @@
     <Window.DataContext>
         <Binding Source="{StaticResource ViewModel}" />
     </Window.DataContext>
+    <Border CornerRadius="12">
 
-    <Grid>
+        <Border CornerRadius="10"                    
+            BorderThickness="2"
+            Opacity="0.95">
+
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+
+            <Grid>
         <Border CornerRadius="12">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
@@ -38,7 +59,13 @@
             <Grid>
 
                 <StackPanel Margin="30,30,30,0" Grid.Row="1" Height="Auto">
-                    <Border CornerRadius="10" BorderThickness="2" Opacity="0.95">
+                    <materialDesign:TransitioningContent>
+                        <materialDesign:TransitioningContent.OpeningEffects>
+                            <materialDesign:TransitionEffect Kind="SlideInFromBottom" Duration="0:0:1.5"/>
+                            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:1.5"/>
+                        </materialDesign:TransitioningContent.OpeningEffects>
+                        <StackPanel>
+                        <Border CornerRadius="10" BorderThickness="2" Opacity="0.95">
                         <Border.BorderBrush>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                 <GradientStop Color="#462AD8" Offset="0"/>
@@ -57,6 +84,7 @@
                     </Border>
 
                     <StackPanel Margin="30,15,30,0" Grid.Row="1" Height="Auto">
+                        
                         <TextBlock Text="Enter Name:" FontSize="16" FontFamily="Montserrat" Margin="0 0 0 5">
                             <TextBlock.Foreground>
                                 <LinearGradientBrush>
@@ -161,7 +189,11 @@
                         </Grid>
                     </StackPanel>
                 </StackPanel>
+                    </materialDesign:TransitioningContent>
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>
+            </Border>
+        </Border>
 </Window>

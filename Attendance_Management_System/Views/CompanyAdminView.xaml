@@ -524,7 +524,7 @@
                                                         <Label Margin="43 0 0 0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" 
                                                                x:Name="lblAddress"
                                                                Content="{Binding CompanyAddress}"></Label>
-                                                        <TextBox Margin="43 0 0 0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Visibility="Collapsed"
+                                                        <TextBox Margin="43 0 0 0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="150" Visibility="Collapsed"
                                                                  Text="{Binding CompanyAddress}"
                                                                  x:Name="tbAddress"></TextBox>                                                        
                                                         
