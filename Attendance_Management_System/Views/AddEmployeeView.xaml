@@ -19,9 +19,9 @@
         AllowsTransparency="True"
         MouseDown="Window_MouseDown">
 
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <vm:AddEmployeeViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>-->
 
 
     <Border CornerRadius="12">

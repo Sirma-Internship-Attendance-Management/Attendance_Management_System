@@ -24,8 +24,11 @@ namespace Attendance_Management_System.Views
         public Company LoggedCompany { get; set; }
         public AddEmployeeView(Company Loggedcompany)
         {
-            InitializeComponent();            
             LoggedCompany = Loggedcompany;
+            InitializeComponent();
+            AddEmployeeViewModel _viewModel = new AddEmployeeViewModel(LoggedCompany);
+            DataContext = _viewModel;
+            
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

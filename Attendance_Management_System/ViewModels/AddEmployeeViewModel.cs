@@ -15,6 +15,7 @@ namespace Attendance_Management_System.ViewModels
         private ObservableCollection<Employee> employees;
         private string name;
         private string position;
+        private int companyId;
         private string contactDetails;
 
         public ObservableCollection<Employee> Employees
@@ -47,6 +48,16 @@ namespace Attendance_Management_System.ViewModels
             }
         }
 
+        public int CompanyId
+        {
+            get { return companyId; }
+            set
+            {
+                companyId = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string ContactDetails
         {
             get { return contactDetails; }
@@ -57,10 +68,13 @@ namespace Attendance_Management_System.ViewModels
             }
         }
 
+        public Company LoggedCompany { get; set; }
+
         public ICommand SaveEmployeeCommand { get; }
 
-        public AddEmployeeViewModel()
+        public AddEmployeeViewModel(Company Loggedcompany)
         {
+            LoggedCompany = Loggedcompany;
             SaveEmployeeCommand = new RelayCommand(SaveEmployee);
             Employees = new ObservableCollection<Employee>();
         }
@@ -77,6 +91,7 @@ namespace Attendance_Management_System.ViewModels
                 {
                     Name = Name,
                     Position = Position,
+                    CompanyId = LoggedCompany.CompanyId,
                     ContactDetails = ContactDetails
                 };
 
